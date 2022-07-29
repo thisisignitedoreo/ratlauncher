@@ -10,6 +10,7 @@ import shutil
 import os
 import requests
 import json
+import zipfile
 
 app = QtWidgets.QApplication(sys.argv)
 form = QtWidgets.QWidget()
@@ -93,24 +94,74 @@ def install():
             msg.exec_()
             return
     elif ui.radioButton_4.isChecked():
-        ui.progressBar.setMaximum(100)
-        ui.label.setText("Downloading ImpactInstaller.jar")
-        ui.progressBar.setValue(30)
-        response = requests.get("https://impactclient.net/ImpactInstaller.jar")
-        app.processEvents()
-        open(
-            os.getenv("TEMP") + "/impactinstaller.jar",
-            "wb").write(response.content)
-        app.processEvents()
-        ui.label.setText("Running ImpactInstaller.jar")
-        ui.progressBar.setValue(60)
-        subprocess.call(
-            "java -jar " + os.getenv("TEMP") + "/impactinstaller.jar")
-        app.processEvents()
-        ui.label.setText("Installation completed")
-    if os.path.isdir(minecraft_folder):
+        if str(ui.comboBox_3.currentText()) == "Impact":
+            ui.progressBar.setMaximum(100)
+            ui.label.setText("Downloading ImpactInstaller.jar")
+            ui.progressBar.setValue(30)
+            response = requests.get("https://impactclient.net/ImpactInstaller.jar")
+            app.processEvents()
+            open(
+                os.getenv("TEMP") + "/impactinstaller.jar",
+                "wb").write(response.content)
+            app.processEvents()
+            ui.label.setText("Running ImpactInstaller.jar")
+            ui.progressBar.setValue(60)
+            subprocess.call(
+                "java -jar " + os.getenv("TEMP") + "/impactinstaller.jar")
+            app.processEvents()
+            ui.label.setText("Installation completed")
+        elif str(ui.comboBox_3.currentText()) == "BatMod":
+            ui.progressBar.setMaximum(100)
+            ui.label.setText("Downloading BatMod_Installer.jar")
+            ui.progressBar.setValue(30)
+            response = requests.get("https://dl.batmod.com/go/download.php")
+            app.processEvents()
+            open(
+                os.getenv("TEMP") + "/batmodinstaller.jar",
+                "wb").write(response.content)
+            app.processEvents()
+            ui.label.setText("Running BatMod_Installer.jar")
+            ui.progressBar.setValue(60)
+            subprocess.call(
+                "java -jar " + os.getenv("TEMP") + "/batmodinstaller.jar")
+            app.processEvents()
+            ui.label.setText("Installation completed")
+        elif str(ui.comboBox_3.currentText()) == "Ares":
+            ui.progressBar.setMaximum(100)
+            ui.label.setText("Downloading AresInstaller.jar")
+            ui.progressBar.setValue(30)
+            response = requests.get("https://aresclient.org/downloads/stable/Ares-2.9-1.18.1.jar")
+            app.processEvents()
+            open(
+                os.getenv("TEMP") + "/aresinstaller.jar",
+                "wb").write(response.content)
+            app.processEvents()
+            ui.label.setText("Running AresInstaller.jar")
+            ui.progressBar.setValue(60)
+            subprocess.call(
+                "java -jar " + os.getenv("TEMP") + "/aresinstaller.jar")
+            app.processEvents()
+            ui.label.setText("Installation completed")
+        elif str(ui.comboBox_3.currentText()) == "LabyMod":
+            ui.progressBar.setMaximum(100)
+            ui.label.setText("Downloading LabyMod3_Installer.jar")
+            ui.progressBar.setValue(30)
+            response = requests.get("https://dl.labymod.net/latest/install/LabyMod3_Installer.jar")
+            app.processEvents()
+            open(
+                os.getenv("TEMP") + "/labyinstaller.jar",
+                "wb").write(response.content)
+            app.processEvents()
+            ui.label.setText("Running LabyMod3_Installer.jar")
+            ui.progressBar.setValue(60)
+            subprocess.call(
+                "java -jar " + os.getenv("TEMP") + "/labyinstaller.jar")
+            app.processEvents()
+            ui.label.setText("Installation completed")
+    if os.path.isdir(minecraft_folder): # 
         open(minecraft_folder + "/launcher_profiles.json", "w").write("{}")
     ui.progressBar.setValue(0)
+    fetchVersions()
 
 
 def run():
@@ -130,7 +181,11 @@ def run():
     options = {
         "username": str(ui.comboBox_2.currentText()),
         "uuid": "non-license",
-        "token": "non-license"
+        "token": "non-license",
+        "customResolution": ui.checkBox_4.isChecked(),
+        "resolutionWidth": ui.lineEdit.text(),
+        "resolutionHeight": ui.lineEdit_3.text(),
+        "demo": ui.checkBox_3.isChecked()
     }
     minecraft_command = mll.command.get_minecraft_command(
         play_version,
@@ -153,6 +208,7 @@ def fetchVersions():
 
 def impactActivated():
     ui.lineEdit_2.setEnabled(not ui.radioButton_4.isChecked())
+    ui.comboBox_3.setEnabled(ui.radioButton_4.isChecked())
 
 
 def fetchAccounts():
@@ -179,6 +235,11 @@ def popAccount():
     open("accounts.json", "w").write(json.dumps(accounts))
     fetchAccounts()
 
+
+def customRes():
+    ui.lineEdit.setEnabled(ui.checkBox_4.isChecked())
+    ui.lineEdit_3.setEnabled(ui.checkBox_4.isChecked())
+
 fetchVersions()
 fetchAccounts()
 
@@ -188,5 +249,6 @@ ui.pushButton_2.clicked.connect(run)
 ui.radioButton_4.toggled.connect(impactActivated)
 ui.toolButton_4.clicked.connect(addAccount)
 ui.toolButton_2.clicked.connect(popAccount)
+ui.checkBox_4.toggled.connect(customRes)
 
 sys.exit(app.exec_())

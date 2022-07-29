@@ -17,7 +17,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(575, 149)
+        Form.resize(499, 202)
         icon = QIcon()
         icon.addFile(u"dependences/icon.ico", QSize(), QIcon.Normal, QIcon.Off)
         Form.setWindowIcon(icon)
@@ -82,6 +82,43 @@ class Ui_Form(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_5)
 
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.checkBox_3 = QCheckBox(Form)
+        self.checkBox_3.setObjectName(u"checkBox_3")
+
+        self.horizontalLayout_7.addWidget(self.checkBox_3)
+
+        self.checkBox_4 = QCheckBox(Form)
+        self.checkBox_4.setObjectName(u"checkBox_4")
+
+        self.horizontalLayout_7.addWidget(self.checkBox_4)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_7)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.lineEdit = QLineEdit(Form)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setEnabled(False)
+
+        self.horizontalLayout_8.addWidget(self.lineEdit)
+
+        self.label_4 = QLabel(Form)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_8.addWidget(self.label_4)
+
+        self.lineEdit_3 = QLineEdit(Form)
+        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.lineEdit_3.setEnabled(False)
+
+        self.horizontalLayout_8.addWidget(self.lineEdit_3)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_8)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -144,6 +181,16 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
+        self.comboBox_3 = QComboBox(Form)
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.setObjectName(u"comboBox_3")
+        self.comboBox_3.setEnabled(False)
+
+        self.verticalLayout_2.addWidget(self.comboBox_3)
+
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
@@ -182,13 +229,21 @@ class Ui_Form(object):
         self.toolButton.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
         self.checkBox_2.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442", None))
         self.checkBox.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.by", None))
+        self.checkBox_3.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e", None))
+        self.checkBox_4.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435", None))
+        self.label_4.setText(QCoreApplication.translate("Form", u"x", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
         self.radioButton_3.setText(QCoreApplication.translate("Form", u"Vanilla", None))
         self.radioButton_2.setText(QCoreApplication.translate("Form", u"Forge", None))
         self.radioButton.setText(QCoreApplication.translate("Form", u"Fabric", None))
-        self.radioButton_4.setText(QCoreApplication.translate("Form", u"Impact", None))
+        self.radioButton_4.setText(QCoreApplication.translate("Form", u"\u041a\u0430\u0441\u0442\u043e\u043c", None))
+        self.comboBox_3.setItemText(0, QCoreApplication.translate("Form", u"Impact", None))
+        self.comboBox_3.setItemText(1, QCoreApplication.translate("Form", u"Ares", None))
+        self.comboBox_3.setItemText(2, QCoreApplication.translate("Form", u"BatMod", None))
+        self.comboBox_3.setItemText(3, QCoreApplication.translate("Form", u"LabyMod", None))
+
         self.label.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u0430\u0442\u0443\u0441", None))
         self.progressBar.setFormat(QCoreApplication.translate("Form", u"%p%", None))
     # retranslateUi
