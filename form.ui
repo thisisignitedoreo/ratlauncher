@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>149</height>
+    <width>499</width>
+    <height>202</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -94,6 +94,49 @@
       </layout>
      </item>
      <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBox_3">
+         <property name="text">
+          <string>Демо</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_4">
+         <property name="text">
+          <string>Свое разрешение</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>x</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -173,11 +216,38 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Impact</string>
+          <string>Кастом</string>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Impact</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ares</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BatMod</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>LabyMod</string>
+        </property>
+       </item>
+      </widget>
      </item>
      <item>
       <spacer name="verticalSpacer_2">
