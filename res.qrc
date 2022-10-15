@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>add_black.svg</file>
+    <file>add_white.svg</file>
+    <file>del_black.svg</file>
+    <file>del_white.svg</file>
+    <file>refresh_black.svg</file>
+    <file>refresh_white.svg</file>
+    <file>dependences/icon.ico</file>
+  </qresource>
+</RCC>
