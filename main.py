@@ -1,57 +1,21 @@
-from form import Ui_Form
-from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtWidgets import QMessageBox
-from PySide2.QtWidgets import QInputDialog
-from random import randint as rint
-import sys
-import minecraft_launcher_lib as mll
-import subprocess
-import shutil
-import os
-import requests
-import json
+from PySide6 import (
+    QtWidgets,
+    QtGui
+)
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
-
-app = QtWidgets.QApplication(sys.argv)
-form = QtWidgets.QWidget()
-ui = Ui_Form()
-ui.setupUi(form)
-form.show()
-
-htmlsession = HTMLSession()
-
-app.setStyle("Fusion")
-
-white_palette = QtGui.QPalette()
-dark_palette = QtGui.QPalette()
-
-dark_palette.setColor(QtGui.QPalette.Window, QtGui.QColor(53, 53, 53))
-dark_palette.setColor(QtGui.QPalette.WindowText, QtGui.Qt.white)
-dark_palette.setColor(QtGui.QPalette.Base, QtGui.QColor(25, 25, 25))
-dark_palette.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(53, 53, 53))
-dark_palette.setColor(QtGui.QPalette.ToolTipBase, QtGui.Qt.white)
-dark_palette.setColor(QtGui.QPalette.ToolTipText, QtGui.Qt.white)
-dark_palette.setColor(QtGui.QPalette.Text, QtGui.Qt.white)
-dark_palette.setColor(QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
-dark_palette.setColor(QtGui.QPalette.ButtonText, QtGui.Qt.white)
-dark_palette.setColor(QtGui.QPalette.BrightText, QtGui.Qt.red)
-dark_palette.setColor(QtGui.QPalette.Link, QtGui.QColor(42, 130, 218))
-dark_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(42, 130, 218))
-dark_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.Qt.black)
-
-minecraft_folder = "gamefiles"
+from form import Ui_Form
+import minecraft_launcher_lib as mll
+import subprocess
+import requests
+import random
+import shutil
+import json
+import sys
+import os
 
 if not os.path.isfile("accounts.json"):
-    open("accounts.json", "w").write(f"[\"RatUser_{rint(100000, 999999)}\"]")
-
-if not os.path.isfile("settings.json"):
-    open("settings.json", "w").write(json.dumps({
-        "theme": "light"
-    }))
-
-if os.path.isdir(minecraft_folder):
-    open(minecraft_folder + "/launcher_profiles.json", "w").write("{}")
+    open("accounts.json", "w").write(f"[\"RatUser_{random.randint(100000, 999999)}\"]")
 
 with open("accounts.json") as acc:
     accounts = json.load(acc)
@@ -59,288 +23,269 @@ with open("accounts.json") as acc:
 with open("settings.json") as settings:
     settings = json.load(settings)
 
-if not accounts:
-    accounts = ["RatUser_" + str(rint(100000, 999999))]
 if not settings:
-    accounts = {"theme": "white"}
+    settings = {"theme": "white"}
 
-match settings["theme"]:
-    case "light":
-        qApp.setPalette(white_palette)
-        app.setStyleSheet("")
-        ui.radioButton_5.setChecked(True)
-        ui.radioButton_6.setChecked(False)
-    case "dark":
-        qApp.setPalette(dark_palette)
-        qApp.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
-        ui.radioButton_5.setChecked(False)
-        ui.radioButton_6.setChecked(True)
-current_max = 0
+class RatLauncher(QtWidgets.QWidget):
+    def __init__(self):
+        super(RatLauncher, self).__init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
 
+        app.setStyle("Fusion")
 
-def set_status(status: str):
-    ui.label.setText(status)
+        self.white_palette = QtGui.QPalette()
+        self.dark_palette = QtGui.QPalette()
 
+        self.dark_palette.setColor(QtGui.QPalette.Window, QtGui.QColor(53, 53, 53))
+        self.dark_palette.setColor(QtGui.QPalette.WindowText, QtGui.Qt.white)
+        self.dark_palette.setColor(QtGui.QPalette.Base, QtGui.QColor(25, 25, 25))
+        self.dark_palette.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(53, 53, 53))
+        self.dark_palette.setColor(QtGui.QPalette.ToolTipBase, QtGui.Qt.white)
+        self.dark_palette.setColor(QtGui.QPalette.ToolTipText, QtGui.Qt.white)
+        self.dark_palette.setColor(QtGui.QPalette.Text, QtGui.Qt.white)
+        self.dark_palette.setColor(QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
+        self.dark_palette.setColor(QtGui.QPalette.ButtonText, QtGui.Qt.white)
+        self.dark_palette.setColor(QtGui.QPalette.BrightText, QtGui.Qt.red)
+        self.dark_palette.setColor(QtGui.QPalette.Link, QtGui.QColor(42, 130, 218))
+        self.dark_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(42, 130, 218))
+        self.dark_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.Qt.black)
 
-def set_progress(progress: int):
-    if current_max != 0:
-        ui.progressBar.setValue(progress)
+        match settings["theme"]:
+            case "white":
+                self.set_dark_theme(False)
+                self.ui.light_radio.setChecked(True)
+                self.ui.dark_radio.setChecked(False)
+            case "dark":
+                self.set_dark_theme(True)
+                self.ui.light_radio.setChecked(False)
+                self.ui.dark_radio.setChecked(True)
 
+        self.minecraft_dir = "gamefiles"
 
-def set_max(new_max: int):
-    global current_max
-    current_max = new_max
-    ui.progressBar.setMaximum(new_max)
+        self.mll_callback = {
+            "setStatus": self.mll_set_status,
+            "setProgress": self.mll_set_progress,
+            "setMax": self.mll_set_max
+        }
 
-callback = {
-    "setStatus": set_status,
-    "setProgress": set_progress,
-    "setMax": set_max
-}
+        self.htmlsession = HTMLSession()
 
+        self.news = {}
+        self.news_list = {}
 
-def install():
-    install_version = str(ui.lineEdit_2.text())
-    if ui.radioButton_3.isChecked():
-        mll.install.install_minecraft_version(
-            install_version,
-            minecraft_folder,
-            callback=callback)
-        app.processEvents()
-    elif ui.radioButton_2.isChecked():
-        forge_version = mll.forge.find_forge_version(install_version)
-        if forge_version is None:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Ошибка!")
-            msg.setInformativeText(
-                'К сожалению эта версия не поддерживает Forge!')
-            msg.setWindowTitle("Упс!")
-            msg.exec_()
-            return
-        mll.forge.install_forge_version(
-            forge_version,
-            minecraft_folder,
-            callback=callback)
-        app.processEvents()
-    elif ui.radioButton.isChecked():
-        try:
-            mll.fabric.install_fabric(install_version, minecraft_folder)
-            app.processEvents()
-        except mll.exceptions.UnsupportedVersion:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Ошибка!")
-            msg.setInformativeText(
-                'К сожалению эта версия не поддерживает Fabric!')
-            msg.setWindowTitle("Упс!")
-            msg.exec_()
-            return
-    elif ui.radioButton_4.isChecked():
-        if str(ui.comboBox_3.currentText()) == "Impact":
-            ui.progressBar.setMaximum(100)
-            ui.label.setText("Downloading ImpactInstaller.jar")
-            ui.progressBar.setValue(30)
-            response = requests.get("https://impactclient.net/ImpactInstaller.jar")
-            app.processEvents()
-            open(
-                os.getenv("TEMP") + "/impactinstaller.jar",
-                "wb").write(response.content)
-            app.processEvents()
-            ui.label.setText("Running ImpactInstaller.jar")
-            ui.progressBar.setValue(60)
-            subprocess.call(
-                "java -jar " + os.getenv("TEMP") + "/impactinstaller.jar")
-            app.processEvents()
-            ui.label.setText("Installation completed")
-        elif str(ui.comboBox_3.currentText()) == "BatMod":
-            ui.progressBar.setMaximum(100)
-            ui.label.setText("Downloading BatMod_Installer.jar")
-            ui.progressBar.setValue(30)
-            response = requests.get("https://dl.batmod.com/go/download.php")
-            app.processEvents()
-            open(
-                os.getenv("TEMP") + "/batmodinstaller.jar",
-                "wb").write(response.content)
-            app.processEvents()
-            ui.label.setText("Running BatMod_Installer.jar")
-            ui.progressBar.setValue(60)
-            subprocess.call(
-                "java -jar " + os.getenv("TEMP") + "/batmodinstaller.jar")
-            app.processEvents()
-            ui.label.setText("Installation completed")
-        elif str(ui.comboBox_3.currentText()) == "Ares":
-            ui.progressBar.setMaximum(100)
-            ui.label.setText("Downloading AresInstaller.jar")
-            ui.progressBar.setValue(30)
-            response = requests.get("https://aresclient.org/downloads/stable/Ares-2.9-1.18.1.jar")
-            app.processEvents()
-            open(
-                os.getenv("TEMP") + "/aresinstaller.jar",
-                "wb").write(response.content)
-            app.processEvents()
-            ui.label.setText("Running AresInstaller.jar")
-            ui.progressBar.setValue(60)
-            subprocess.call(
-                "java -jar " + os.getenv("TEMP") + "/aresinstaller.jar")
-            app.processEvents()
-            ui.label.setText("Installation completed")
-        elif str(ui.comboBox_3.currentText()) == "LabyMod":
-            ui.progressBar.setMaximum(100)
-            ui.label.setText("Downloading LabyMod3_Installer.jar")
-            ui.progressBar.setValue(30)
-            response = requests.get("https://dl.labymod.net/latest/install/LabyMod3_Installer.jar")
-            app.processEvents()
-            open(
-                os.getenv("TEMP") + "/labyinstaller.jar",
-                "wb").write(response.content)
-            app.processEvents()
-            ui.label.setText("Running LabyMod3_Installer.jar")
-            ui.progressBar.setValue(60)
-            subprocess.call(
-                "java -jar " + os.getenv("TEMP") + "/labyinstaller.jar")
-            app.processEvents()
-            ui.label.setText("Installation completed")
-    if os.path.isdir(minecraft_folder): # 
-        open(minecraft_folder + "/launcher_profiles.json", "w").write("{}")
-    ui.progressBar.setValue(0)
-    fetchVersions()
+        self.current_max = 0
 
+        self.fetch_accounts()
+        self.update_version_list()
+        self.connect_buttons()
 
-def run():
-    play_version = str(ui.comboBox.currentText())
-    if ui.checkBox_2.isChecked():
-        mll.install.install_minecraft_version(
-            play_version,
-            minecraft_folder,
-            callback=callback)
-    if ui.checkBox.isChecked():
-        shutil.copytree(
-            "dependences/authlib",
-            minecraft_folder + "/libraries/com/mojang/authlib",
-            dirs_exist_ok=True)
-    app.processEvents()
-    ui.progressBar.setValue(0)
-    options = {
-        "username": str(ui.comboBox_2.currentText()),
-        "uuid": "non-license",
-        "token": "non-license",
-        "customResolution": ui.checkBox_4.isChecked(),
-        "resolutionWidth": ui.lineEdit.text(),
-        "resolutionHeight": ui.lineEdit_3.text(),
-        "demo": ui.checkBox_3.isChecked()
-    }
-    minecraft_command = mll.command.get_minecraft_command(
-        play_version,
-        minecraft_folder,
-        options)
-    subprocess.call(minecraft_command)
-    app.processEvents()
+    def mll_set_status(self, status: str) -> None:
+        self.ui.status_label.setText(status)
 
+    def mll_set_progress(self, progress: int) -> None:
+        if self.current_max != 0:
+            self.ui.status_progressbar.setValue(progress)
 
-def fetchVersions():
-    if os.path.isdir("gamefiles") is False:
-        result = ["Нет установленых версий"]
-    else:
-        result = [i["id"] for i in mll.utils.get_installed_versions(
-            minecraft_folder)
-            ]
-    ui.comboBox.clear()
-    ui.comboBox.addItems(result)
+    def mll_set_max(self, new_max: int) -> None:
+        self.current_max = new_max
+        self.ui.status_progressbar.setMaximum(new_max)
 
+    def connect_buttons(self) -> None:
+        self.ui.update_versions.clicked.connect(self.update_version_list)
+        self.ui.install_button.clicked.connect(self.install_version)
+        self.ui.play_button.clicked.connect(self.run_game)
+        self.ui.custom_client_radio.toggled.connect(self.custom_client_activated)
+        self.ui.add_account.clicked.connect(self.add_account)
+        self.ui.delete_account.clicked.connect(self.del_account)
+        self.ui.custom_resolution.toggled.connect(self.custom_resolution)
+        self.ui.light_radio.toggled.connect(lambda: self.set_dark_theme(False))
+        self.ui.dark_radio.toggled.connect(lambda: self.set_dark_theme(True))
+        self.ui.news_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(1))
+        self.ui.back_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
+        self.ui.news_button.clicked.connect(self.update_news)
+        self.ui.news_list.itemDoubleClicked.connect(self.load_news)
 
-def impactActivated():
-    ui.lineEdit_2.setEnabled(not ui.radioButton_4.isChecked())
-    ui.comboBox_3.setEnabled(ui.radioButton_4.isChecked())
+    def update_news(self):
+        self.news = mll.utils.get_minecraft_news(-1)
+        self.news = mll.utils.get_minecraft_news(self.news["article_count"])
+        self.ui.news_count_label.setText(f"Всего новостей: {self.news['article_count']}")
+        self.ui.news_list.clear()
+        self.news_list = {}
+        for k, i in enumerate(self.news["article_grid"]):
+            self.ui.news_list.addItem(i["default_tile"]["title"])
+            self.news_list.update({i["default_tile"]["title"]: k})
 
-
-def fetchAccounts():
-    ui.comboBox_2.clear()
-    for i in accounts:
-        ui.comboBox_2.addItem(i)
-
-
-def addAccount():
-    global accounts
-    text, ok = QInputDialog.getText(
-        form,
-        'Новый аккаунт',
-        'Введите ник нового аккаунта:')
-    if ok and text:
-        accounts.append(text)
-    open("accounts.json", "w").write(json.dumps(accounts))
-    fetchAccounts()
-
-
-def popAccount():
-    global accounts
-    accounts.remove(str(ui.comboBox_2.currentText()))
-    open("accounts.json", "w").write(json.dumps(accounts))
-    fetchAccounts()
-
-
-def customRes():
-    ui.lineEdit.setEnabled(ui.checkBox_4.isChecked())
-    ui.lineEdit_3.setEnabled(ui.checkBox_4.isChecked())
-
-def setTheme(isDark):
-    if isDark:
-        qApp.setPalette(dark_palette)
-        qApp.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
-        settings["theme"] = "dark"
-    else:
-        qApp.setPalette(white_palette)
-        app.setStyleSheet("")
-        settings["theme"] = "white"
-    with open("settings.json", "w") as file:
-        file.write(json.dumps(settings))
-
-news = {}
-newslst = {}
-
-def updateNews():
-    global news, newslst
-    news = mll.utils.get_minecraft_news(-1)
-    news = mll.utils.get_minecraft_news(news["article_count"])
-    ui.label_5.setText(f"Всего новостей: {news['article_count']}")
-    ui.listWidget.clear()
-    newslst = {}
-    for k, i in enumerate(news["article_grid"]):
-        ui.listWidget.addItem(i["default_tile"]["title"])
-        newslst.update({i["default_tile"]["title"]: k})
-
-def loadNews(item):
-    for i in os.listdir("temp"):
-        os.remove(f"temp/{i}")
-    article = news["article_grid"][newslst[item.text()]]
-    html = htmlsession.get("https://www.minecraft.net" + article["article_url"]).text
-    soup = BeautifulSoup(html, "html.parser")
-    for i in [f'https://minecraft.net{i.get("src")}' for i in soup.select('img.article-image-carousel__image')]:
-        img = htmlsession.get(i).content
-        with open(f"temp/{i.split('/')[-1:][0]}", "wb") as file:
-            file.write(img)
-    ui.textEdit.setHtml(f"""<h1>{soup.select('div.page-section:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h1:nth-child(1)')[0]}</h1>
+    def load_news(self, item):
+        for i in os.listdir("temp"):
+            os.remove(f"temp/{i}")
+        article = self.news["article_grid"][self.news_list[item.text()]]
+        html = self.htmlsession.get("https://www.minecraft.net" + article["article_url"]).text
+        soup = BeautifulSoup(html, "html.parser")
+        for i in [f'https://minecraft.net{i.get("src")}' for i in soup.select('img.article-image-carousel__image')]:
+            img = self.htmlsession.get(i).content
+            with open(f"temp/{i.split('/')[-1:][0]}", "wb") as file:
+                file.write(img)
+        self.ui.news_page_text_edit.setHtml(
+            f"""<h1>{soup.select('div.page-section:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h1:nth-child(1)')[0]}</h1>
 <h2>{soup.select('.lead')[0]}</h2>
 {''.join([f'''<img width="240" height="160" src="temp/{i.get("src").split("/")[-1:][0]}" /><br>
 {i.get("alt")}''' for i in soup.select('img.article-image-carousel__image')])}
 <p>{'</p><p>'.join([str(i) for i in soup.select('.end-with-block')])}</p>
 """)
 
-fetchVersions()
-fetchAccounts()
+    def custom_resolution(self):
+        self.ui.w_res.setEnabled(self.ui.custom_resolution.isChecked())
+        self.ui.h_res.setEnabled(self.ui.custom_resolution.isChecked())
+        self.ui.x_label.setEnabled(self.ui.custom_resolution.isChecked())
 
-ui.toolButton.clicked.connect(fetchVersions)
-ui.pushButton.clicked.connect(install)
-ui.pushButton_2.clicked.connect(run)
-ui.radioButton_4.toggled.connect(impactActivated)
-ui.toolButton_4.clicked.connect(addAccount)
-ui.toolButton_2.clicked.connect(popAccount)
-ui.checkBox_4.toggled.connect(customRes)
-ui.radioButton_6.toggled.connect(lambda: setTheme(True))
-ui.radioButton_5.toggled.connect(lambda: setTheme(False))
-ui.pushButton_3.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(1))
-ui.toolButton_3.clicked.connect(lambda: ui.stackedWidget.setCurrentIndex(0))
-ui.toolButton_5.clicked.connect(updateNews)
-ui.listWidget.itemDoubleClicked.connect(loadNews)
+    def custom_client_activated(self):
+        self.ui.version_lineedit.setEnabled(not self.ui.custom_client_radio.isChecked())
+        self.ui.custom_client_combo.setEnabled(self.ui.custom_client_radio.isChecked())
 
-sys.exit(app.exec_())
+    def fetch_accounts(self) -> None:
+        open("accounts.json", "w").write(json.dumps(accounts))
+        self.ui.account_combo.clear()
+        for i in accounts:
+            self.ui.account_combo.addItem(i)
+
+    def del_account(self) -> None:
+        accounts.remove(self.ui.account_combo.currentText())
+        self.fetch_accounts()
+
+    def add_account(self) -> None:
+        global accounts
+        text, ok = QtWidgets.QInputDialog.getText(window, 'Новый аккаунт', 'Введите ник нового аккаунта:')
+        if ok and text:
+            accounts.append(text)
+        self.fetch_accounts()
+
+    def run_game(self) -> None:
+        play_version = str(self.ui.version_combo.currentText())
+        if self.ui.update_jsons.isChecked():
+            mll.install.install_minecraft_version(
+                play_version,
+                self.minecraft_dir,
+                callback=self.mll_callback)
+        if self.ui.integrate_elyby.isChecked():
+            shutil.copytree(
+                "dependences/authlib",
+                self.minecraft_dir + "/libraries/com/mojang/authlib",
+                dirs_exist_ok=True)
+        app.processEvents()
+        self.ui.status_progressbar.setValue(0)
+        options = {
+            "username": str(self.ui.account_combo.currentText()),
+            "uuid": "non-license",
+            "token": "non-license",
+            "customResolution": self.ui.custom_resolution.isChecked(),
+            "resolutionWidth": self.ui.w_res.text(),
+            "resolutionHeight": self.ui.h_res.text(),
+            "demo": self.ui.demo_mode.isChecked()
+        }
+        minecraft_command = mll.command.get_minecraft_command(
+            play_version,
+            self.minecraft_dir,
+            options)
+        app.processEvents()
+        subprocess.call(minecraft_command)
+
+    def set_dark_theme(self, theme: bool) -> None:
+        match theme:
+            case False:
+                app.setPalette(self.white_palette)
+                app.setStyleSheet("")
+                settings["theme"] = "white"
+            case True:
+                app.setPalette(self.dark_palette)
+                app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
+                settings["theme"] = "dark"
+        with open("settings.json", "w") as file:
+            file.write(json.dumps(settings))
+
+    def update_version_list(self) -> None:
+        self.ui.version_combo.clear()
+        if not os.path.isdir(self.minecraft_dir):
+            self.ui.version_combo.addItems(["Нет установленных версий!"])
+        else:
+            self.ui.version_combo.addItems([i["id"] for i in mll.utils.get_installed_versions(self.minecraft_dir)])
+
+    def install_version(self) -> None:
+        version_to_install = str(self.ui.version_lineedit.text())
+        if self.ui.vanilla_radio.isChecked():
+            mll.install.install_minecraft_version(version_to_install, self.minecraft_dir, callback=self.mll_callback)
+        elif self.ui.forge_radio.isChecked():
+            forge_version = mll.forge.find_forge_version(version_to_install)
+            if forge_version is None:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Critical)
+                msg.setText('К сожалению эта версия не поддерживает Forge!')
+                msg.setWindowTitle("Ошибка!")
+                msg.exec()
+                return
+            mll.forge.install_forge_version(forge_version, self.minecraft_dir, callback=self.mll_callback)
+        elif self.ui.fabric_radio.isChecked():
+            try:
+                mll.fabric.install_fabric(version_to_install, self.minecraft_dir)
+            except mll.exceptions.UnsupportedVersion:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Critical)
+                msg.setWindowTitle("Ошибка!")
+                msg.setText('К сожалению эта версия не поддерживает Fabric!')
+                msg.exec_()
+                return
+        elif self.ui.custom_client_radio.isChecked():
+            if str(self.ui.custom_client_combo.currentText()) == "Impact":
+                self.ui.status_progressbar.setMaximum(3)
+                self.ui.status_label.setText("Downloading ImpactInstaller.jar")
+                self.ui.status_progressbar.setValue(1)
+                response = requests.get("https://impactclient.net/ImpactInstaller.jar")
+                open(os.getenv("TEMP") + "/impactinstaller.jar", "wb").write(response.content)
+                self.ui.status_label.setText("Running ImpactInstaller.jar")
+                self.ui.status_progressbar.setValue(2)
+                subprocess.call("java -jar " + os.getenv("TEMP") + "/impactinstaller.jar")
+                self.ui.status_label.setText("Installation completed")
+            elif str(self.ui.custom_client_combo.currentText()) == "BatMod":
+                self.ui.status_progressbar.setMaximum(3)
+                self.ui.status_label.setText("Downloading BatMod_Installer.jar")
+                self.ui.status_progressbar.setValue(1)
+                response = requests.get("https://dl.batmod.com/go/download.php")
+                open(os.getenv("TEMP") + "/batmodinstaller.jar", "wb").write(response.content)
+                self.ui.status_label.setText("Running BatMod_Installer.jar")
+                self.ui.status_progressbar.setValue(2)
+                subprocess.call("java -jar " + os.getenv("TEMP") + "/batmodinstaller.jar")
+                self.ui.status_label.setText("Installation completed")
+            elif str(self.ui.custom_client_combo.currentText()) == "Ares":
+                self.ui.status_progressbar.setMaximum(3)
+                self.ui.status_label.setText("Downloading AresInstaller.jar")
+                self.ui.status_progressbar.setValue(1)
+                response = requests.get("https://aresclient.org/downloads/stable/Ares-2.9-1.18.1.jar")
+                open(
+                    os.getenv("TEMP") + "/aresinstaller.jar",
+                    "wb").write(response.content)
+                self.ui.status_label.setText("Running AresInstaller.jar")
+                self.ui.status_progressbar.setValue(2)
+                subprocess.call("java -jar " + os.getenv("TEMP") + "/aresinstaller.jar")
+                self.ui.status_label.setText("Installation completed")
+            elif str(self.ui.custom_client_combo.currentText()) == "LabyMod":
+                self.ui.status_progressbar.setMaximum(3)
+                self.ui.status_label.setText("Downloading LabyMod3_Installer.jar")
+                self.ui.status_progressbar.setValue(1)
+                response = requests.get("https://dl.labymod.net/latest/install/LabyMod3_Installer.jar")
+                open(os.getenv("TEMP") + "/labyinstaller.jar", "wb").write(response.content)
+                self.ui.status_label.setText("Running LabyMod3_Installer.jar")
+                self.ui.status_progressbar.setValue(2)
+                subprocess.call("java -jar " + os.getenv("TEMP") + "/labyinstaller.jar")
+                self.ui.status_label.setText("Installation completed")
+        if os.path.isdir(self.minecraft_dir):
+            open(self.minecraft_dir + "/launcher_profiles.json", "w").write("{}")
+        self.ui.status_progressbar.setValue(0)
+        self.update_version_list()
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+
+    window = RatLauncher()
+    window.show()
+
+    sys.exit(app.exec())

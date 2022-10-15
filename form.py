@@ -3,15 +3,23 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.3.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox,
+    QHBoxLayout, QLabel, QLineEdit, QListWidget,
+    QListWidgetItem, QProgressBar, QPushButton, QRadioButton,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTextEdit,
+    QToolButton, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -23,289 +31,290 @@ class Ui_Form(object):
         Form.setWindowIcon(icon)
         self.horizontalLayout = QHBoxLayout(Form)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.stackedWidget = QStackedWidget(Form)
-        self.stackedWidget.setObjectName(u"stackedWidget")
-        self.page = QWidget()
-        self.page.setObjectName(u"page")
-        self.horizontalLayout_10 = QHBoxLayout(self.page)
+        self.st_widget_main = QStackedWidget(Form)
+        self.st_widget_main.setObjectName(u"st_widget_main")
+        self.play_page = QWidget()
+        self.play_page.setObjectName(u"play_page")
+        self.horizontalLayout_10 = QHBoxLayout(self.play_page)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_2 = QLabel(self.page)
-        self.label_2.setObjectName(u"label_2")
+        self.left_layout = QVBoxLayout()
+        self.left_layout.setObjectName(u"left_layout")
+        self.game_label = QLabel(self.play_page)
+        self.game_label.setObjectName(u"game_label")
 
-        self.verticalLayout.addWidget(self.label_2)
+        self.left_layout.addWidget(self.game_label)
 
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.comboBox_2 = QComboBox(self.page)
-        self.comboBox_2.setObjectName(u"comboBox_2")
+        self.account_layout = QHBoxLayout()
+        self.account_layout.setObjectName(u"account_layout")
+        self.account_combo = QComboBox(self.play_page)
+        self.account_combo.setObjectName(u"account_combo")
 
-        self.horizontalLayout_6.addWidget(self.comboBox_2)
+        self.account_layout.addWidget(self.account_combo)
 
-        self.toolButton_4 = QToolButton(self.page)
-        self.toolButton_4.setObjectName(u"toolButton_4")
+        self.add_account = QToolButton(self.play_page)
+        self.add_account.setObjectName(u"add_account")
 
-        self.horizontalLayout_6.addWidget(self.toolButton_4)
+        self.account_layout.addWidget(self.add_account)
 
-        self.toolButton_2 = QToolButton(self.page)
-        self.toolButton_2.setObjectName(u"toolButton_2")
+        self.delete_account = QToolButton(self.play_page)
+        self.delete_account.setObjectName(u"delete_account")
 
-        self.horizontalLayout_6.addWidget(self.toolButton_2)
+        self.account_layout.addWidget(self.delete_account)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_6)
+        self.left_layout.addLayout(self.account_layout)
 
-        self.horizontalLayout_3 = QHBoxLayout()
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.comboBox = QComboBox(self.page)
-        self.comboBox.setObjectName(u"comboBox")
+        self.version_layout = QHBoxLayout()
+        self.version_layout.setObjectName(u"version_layout")
+        self.version_combo = QComboBox(self.play_page)
+        self.version_combo.setObjectName(u"version_combo")
 
-        self.horizontalLayout_3.addWidget(self.comboBox)
+        self.version_layout.addWidget(self.version_combo)
 
-        self.toolButton = QToolButton(self.page)
-        self.toolButton.setObjectName(u"toolButton")
+        self.update_versions = QToolButton(self.play_page)
+        self.update_versions.setObjectName(u"update_versions")
 
-        self.horizontalLayout_3.addWidget(self.toolButton)
+        self.version_layout.addWidget(self.update_versions)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.left_layout.addLayout(self.version_layout)
 
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.checkBox_2 = QCheckBox(self.page)
-        self.checkBox_2.setObjectName(u"checkBox_2")
-        self.checkBox_2.setChecked(True)
+        self.settings_layout_1 = QHBoxLayout()
+        self.settings_layout_1.setObjectName(u"settings_layout_1")
+        self.update_jsons = QCheckBox(self.play_page)
+        self.update_jsons.setObjectName(u"update_jsons")
+        self.update_jsons.setChecked(True)
 
-        self.horizontalLayout_5.addWidget(self.checkBox_2)
+        self.settings_layout_1.addWidget(self.update_jsons)
 
-        self.checkBox = QCheckBox(self.page)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setChecked(True)
+        self.integrate_elyby = QCheckBox(self.play_page)
+        self.integrate_elyby.setObjectName(u"integrate_elyby")
+        self.integrate_elyby.setChecked(True)
 
-        self.horizontalLayout_5.addWidget(self.checkBox)
+        self.settings_layout_1.addWidget(self.integrate_elyby)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_5)
+        self.left_layout.addLayout(self.settings_layout_1)
 
-        self.horizontalLayout_7 = QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.checkBox_3 = QCheckBox(self.page)
-        self.checkBox_3.setObjectName(u"checkBox_3")
+        self.settings_layout_2 = QHBoxLayout()
+        self.settings_layout_2.setObjectName(u"settings_layout_2")
+        self.demo_mode = QCheckBox(self.play_page)
+        self.demo_mode.setObjectName(u"demo_mode")
 
-        self.horizontalLayout_7.addWidget(self.checkBox_3)
+        self.settings_layout_2.addWidget(self.demo_mode)
 
-        self.checkBox_4 = QCheckBox(self.page)
-        self.checkBox_4.setObjectName(u"checkBox_4")
+        self.custom_resolution = QCheckBox(self.play_page)
+        self.custom_resolution.setObjectName(u"custom_resolution")
 
-        self.horizontalLayout_7.addWidget(self.checkBox_4)
+        self.settings_layout_2.addWidget(self.custom_resolution)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_7)
+        self.left_layout.addLayout(self.settings_layout_2)
 
-        self.horizontalLayout_8 = QHBoxLayout()
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.lineEdit = QLineEdit(self.page)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setEnabled(False)
+        self.resolution_layout = QHBoxLayout()
+        self.resolution_layout.setObjectName(u"resolution_layout")
+        self.w_res = QLineEdit(self.play_page)
+        self.w_res.setObjectName(u"w_res")
+        self.w_res.setEnabled(False)
 
-        self.horizontalLayout_8.addWidget(self.lineEdit)
+        self.resolution_layout.addWidget(self.w_res)
 
-        self.label_4 = QLabel(self.page)
-        self.label_4.setObjectName(u"label_4")
+        self.x_label = QLabel(self.play_page)
+        self.x_label.setObjectName(u"x_label")
+        self.x_label.setEnabled(False)
 
-        self.horizontalLayout_8.addWidget(self.label_4)
+        self.resolution_layout.addWidget(self.x_label)
 
-        self.lineEdit_3 = QLineEdit(self.page)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
-        self.lineEdit_3.setEnabled(False)
+        self.h_res = QLineEdit(self.play_page)
+        self.h_res.setObjectName(u"h_res")
+        self.h_res.setEnabled(False)
 
-        self.horizontalLayout_8.addWidget(self.lineEdit_3)
+        self.resolution_layout.addWidget(self.h_res)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_8)
+        self.left_layout.addLayout(self.resolution_layout)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.v_spacer_1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.verticalLayout.addItem(self.verticalSpacer)
+        self.left_layout.addItem(self.v_spacer_1)
 
-        self.pushButton_2 = QPushButton(self.page)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.play_button = QPushButton(self.play_page)
+        self.play_button.setObjectName(u"play_button")
 
-        self.verticalLayout.addWidget(self.pushButton_2)
+        self.left_layout.addWidget(self.play_button)
 
 
-        self.horizontalLayout_10.addLayout(self.verticalLayout)
+        self.horizontalLayout_10.addLayout(self.left_layout)
 
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label_3 = QLabel(self.page)
-        self.label_3.setObjectName(u"label_3")
+        self.right_layout = QVBoxLayout()
+        self.right_layout.setObjectName(u"right_layout")
+        self.install_label = QLabel(self.play_page)
+        self.install_label.setObjectName(u"install_label")
 
-        self.verticalLayout_2.addWidget(self.label_3)
+        self.right_layout.addWidget(self.install_label)
 
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.lineEdit_2 = QLineEdit(self.page)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.version_install_layout = QHBoxLayout()
+        self.version_install_layout.setObjectName(u"version_install_layout")
+        self.version_lineedit = QLineEdit(self.play_page)
+        self.version_lineedit.setObjectName(u"version_lineedit")
 
-        self.horizontalLayout_4.addWidget(self.lineEdit_2)
+        self.version_install_layout.addWidget(self.version_lineedit)
 
-        self.pushButton = QToolButton(self.page)
-        self.pushButton.setObjectName(u"pushButton")
+        self.install_button = QToolButton(self.play_page)
+        self.install_button.setObjectName(u"install_button")
 
-        self.horizontalLayout_4.addWidget(self.pushButton)
+        self.version_install_layout.addWidget(self.install_button)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_4)
+        self.right_layout.addLayout(self.version_install_layout)
 
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.radioButton_3 = QRadioButton(self.page)
-        self.buttonGroup = QButtonGroup(Form)
-        self.buttonGroup.setObjectName(u"buttonGroup")
-        self.buttonGroup.addButton(self.radioButton_3)
-        self.radioButton_3.setObjectName(u"radioButton_3")
-        self.radioButton_3.setChecked(True)
+        self.type_layout = QHBoxLayout()
+        self.type_layout.setObjectName(u"type_layout")
+        self.vanilla_radio = QRadioButton(self.play_page)
+        self.btn_group_1 = QButtonGroup(Form)
+        self.btn_group_1.setObjectName(u"btn_group_1")
+        self.btn_group_1.addButton(self.vanilla_radio)
+        self.vanilla_radio.setObjectName(u"vanilla_radio")
+        self.vanilla_radio.setChecked(True)
 
-        self.horizontalLayout_2.addWidget(self.radioButton_3)
+        self.type_layout.addWidget(self.vanilla_radio)
 
-        self.radioButton_2 = QRadioButton(self.page)
-        self.buttonGroup.addButton(self.radioButton_2)
-        self.radioButton_2.setObjectName(u"radioButton_2")
-        self.radioButton_2.setChecked(False)
+        self.forge_radio = QRadioButton(self.play_page)
+        self.btn_group_1.addButton(self.forge_radio)
+        self.forge_radio.setObjectName(u"forge_radio")
+        self.forge_radio.setChecked(False)
 
-        self.horizontalLayout_2.addWidget(self.radioButton_2)
+        self.type_layout.addWidget(self.forge_radio)
 
-        self.radioButton = QRadioButton(self.page)
-        self.buttonGroup.addButton(self.radioButton)
-        self.radioButton.setObjectName(u"radioButton")
+        self.fabric_radio = QRadioButton(self.play_page)
+        self.btn_group_1.addButton(self.fabric_radio)
+        self.fabric_radio.setObjectName(u"fabric_radio")
 
-        self.horizontalLayout_2.addWidget(self.radioButton)
+        self.type_layout.addWidget(self.fabric_radio)
 
-        self.radioButton_4 = QRadioButton(self.page)
-        self.buttonGroup.addButton(self.radioButton_4)
-        self.radioButton_4.setObjectName(u"radioButton_4")
-        self.radioButton_4.setEnabled(True)
+        self.custom_client_radio = QRadioButton(self.play_page)
+        self.btn_group_1.addButton(self.custom_client_radio)
+        self.custom_client_radio.setObjectName(u"custom_client_radio")
+        self.custom_client_radio.setEnabled(True)
 
-        self.horizontalLayout_2.addWidget(self.radioButton_4)
+        self.type_layout.addWidget(self.custom_client_radio)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.right_layout.addLayout(self.type_layout)
 
-        self.comboBox_3 = QComboBox(self.page)
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.setObjectName(u"comboBox_3")
-        self.comboBox_3.setEnabled(False)
+        self.custom_client_combo = QComboBox(self.play_page)
+        self.custom_client_combo.addItem("")
+        self.custom_client_combo.addItem("")
+        self.custom_client_combo.addItem("")
+        self.custom_client_combo.addItem("")
+        self.custom_client_combo.setObjectName(u"custom_client_combo")
+        self.custom_client_combo.setEnabled(False)
 
-        self.verticalLayout_2.addWidget(self.comboBox_3)
+        self.right_layout.addWidget(self.custom_client_combo)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.v_spacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.verticalLayout_2.addItem(self.verticalSpacer_2)
+        self.right_layout.addItem(self.v_spacer_2)
 
-        self.pushButton_3 = QPushButton(self.page)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.news_button = QPushButton(self.play_page)
+        self.news_button.setObjectName(u"news_button")
 
-        self.verticalLayout_2.addWidget(self.pushButton_3)
+        self.right_layout.addWidget(self.news_button)
 
-        self.horizontalLayout_9 = QHBoxLayout()
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.radioButton_5 = QRadioButton(self.page)
-        self.buttonGroup_2 = QButtonGroup(Form)
-        self.buttonGroup_2.setObjectName(u"buttonGroup_2")
-        self.buttonGroup_2.addButton(self.radioButton_5)
-        self.radioButton_5.setObjectName(u"radioButton_5")
-        self.radioButton_5.setChecked(True)
+        self.theme_layout = QHBoxLayout()
+        self.theme_layout.setObjectName(u"theme_layout")
+        self.light_radio = QRadioButton(self.play_page)
+        self.btn_group_2 = QButtonGroup(Form)
+        self.btn_group_2.setObjectName(u"btn_group_2")
+        self.btn_group_2.addButton(self.light_radio)
+        self.light_radio.setObjectName(u"light_radio")
+        self.light_radio.setChecked(True)
 
-        self.horizontalLayout_9.addWidget(self.radioButton_5)
+        self.theme_layout.addWidget(self.light_radio)
 
-        self.radioButton_6 = QRadioButton(self.page)
-        self.buttonGroup_2.addButton(self.radioButton_6)
-        self.radioButton_6.setObjectName(u"radioButton_6")
-        self.radioButton_6.setChecked(False)
+        self.dark_radio = QRadioButton(self.play_page)
+        self.btn_group_2.addButton(self.dark_radio)
+        self.dark_radio.setObjectName(u"dark_radio")
+        self.dark_radio.setChecked(False)
 
-        self.horizontalLayout_9.addWidget(self.radioButton_6)
+        self.theme_layout.addWidget(self.dark_radio)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_9)
+        self.right_layout.addLayout(self.theme_layout)
 
-        self.label = QLabel(self.page)
-        self.label.setObjectName(u"label")
+        self.status_label = QLabel(self.play_page)
+        self.status_label.setObjectName(u"status_label")
 
-        self.verticalLayout_2.addWidget(self.label)
+        self.right_layout.addWidget(self.status_label)
 
-        self.progressBar = QProgressBar(self.page)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setValue(0)
+        self.status_progressbar = QProgressBar(self.play_page)
+        self.status_progressbar.setObjectName(u"status_progressbar")
+        self.status_progressbar.setValue(0)
 
-        self.verticalLayout_2.addWidget(self.progressBar)
+        self.right_layout.addWidget(self.status_progressbar)
 
 
-        self.horizontalLayout_10.addLayout(self.verticalLayout_2)
+        self.horizontalLayout_10.addLayout(self.right_layout)
 
-        self.stackedWidget.addWidget(self.page)
-        self.page_2 = QWidget()
-        self.page_2.setObjectName(u"page_2")
-        self.verticalLayout_5 = QVBoxLayout(self.page_2)
+        self.st_widget_main.addWidget(self.play_page)
+        self.news_page = QWidget()
+        self.news_page.setObjectName(u"news_page")
+        self.verticalLayout_5 = QVBoxLayout(self.news_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.horizontalLayout_12 = QHBoxLayout()
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.toolButton_3 = QToolButton(self.page_2)
-        self.toolButton_3.setObjectName(u"toolButton_3")
+        self.toolbar_layout = QHBoxLayout()
+        self.toolbar_layout.setObjectName(u"toolbar_layout")
+        self.back_button = QToolButton(self.news_page)
+        self.back_button.setObjectName(u"back_button")
 
-        self.horizontalLayout_12.addWidget(self.toolButton_3)
+        self.toolbar_layout.addWidget(self.back_button)
 
-        self.toolButton_5 = QToolButton(self.page_2)
-        self.toolButton_5.setObjectName(u"toolButton_5")
+        self.update_button = QToolButton(self.news_page)
+        self.update_button.setObjectName(u"update_button")
 
-        self.horizontalLayout_12.addWidget(self.toolButton_5)
+        self.toolbar_layout.addWidget(self.update_button)
 
-        self.label_5 = QLabel(self.page_2)
-        self.label_5.setObjectName(u"label_5")
+        self.news_count_label = QLabel(self.news_page)
+        self.news_count_label.setObjectName(u"news_count_label")
 
-        self.horizontalLayout_12.addWidget(self.label_5)
-
-
-        self.verticalLayout_5.addLayout(self.horizontalLayout_12)
-
-        self.horizontalLayout_11 = QHBoxLayout()
-        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.listWidget = QListWidget(self.page_2)
-        self.listWidget.setObjectName(u"listWidget")
-
-        self.verticalLayout_3.addWidget(self.listWidget)
+        self.toolbar_layout.addWidget(self.news_count_label)
 
 
-        self.horizontalLayout_11.addLayout(self.verticalLayout_3)
+        self.verticalLayout_5.addLayout(self.toolbar_layout)
 
-        self.verticalLayout_4 = QVBoxLayout()
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.textEdit = QTextEdit(self.page_2)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setReadOnly(True)
+        self.main_layout = QHBoxLayout()
+        self.main_layout.setObjectName(u"main_layout")
+        self.left_layout_news = QVBoxLayout()
+        self.left_layout_news.setObjectName(u"left_layout_news")
+        self.news_list = QListWidget(self.news_page)
+        self.news_list.setObjectName(u"news_list")
 
-        self.verticalLayout_4.addWidget(self.textEdit)
-
-
-        self.horizontalLayout_11.addLayout(self.verticalLayout_4)
+        self.left_layout_news.addWidget(self.news_list)
 
 
-        self.verticalLayout_5.addLayout(self.horizontalLayout_11)
+        self.main_layout.addLayout(self.left_layout_news)
 
-        self.stackedWidget.addWidget(self.page_2)
+        self.right_layout_news = QVBoxLayout()
+        self.right_layout_news.setObjectName(u"right_layout_news")
+        self.news_page_text_edit = QTextEdit(self.news_page)
+        self.news_page_text_edit.setObjectName(u"news_page_text_edit")
+        self.news_page_text_edit.setReadOnly(True)
 
-        self.horizontalLayout.addWidget(self.stackedWidget)
+        self.right_layout_news.addWidget(self.news_page_text_edit)
+
+
+        self.main_layout.addLayout(self.right_layout_news)
+
+
+        self.verticalLayout_5.addLayout(self.main_layout)
+
+        self.st_widget_main.addWidget(self.news_page)
+
+        self.horizontalLayout.addWidget(self.st_widget_main)
 
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.st_widget_main.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -313,42 +322,42 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"RatLauncher", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430", None))
-        self.toolButton_4.setText(QCoreApplication.translate("Form", u"+", None))
-        self.toolButton_2.setText(QCoreApplication.translate("Form", u"X", None))
+        self.game_label.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430", None))
+        self.add_account.setText(QCoreApplication.translate("Form", u"+", None))
+        self.delete_account.setText(QCoreApplication.translate("Form", u"X", None))
 #if QT_CONFIG(tooltip)
-        self.comboBox.setToolTip(QCoreApplication.translate("Form", u"\u0412\u0435\u0440\u0441\u0438\u044f", None))
+        self.version_combo.setToolTip(QCoreApplication.translate("Form", u"\u0412\u0435\u0440\u0441\u0438\u044f", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(accessibility)
-        self.comboBox.setAccessibleName("")
+        self.version_combo.setAccessibleName("")
 #endif // QT_CONFIG(accessibility)
-        self.toolButton.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
-        self.checkBox_2.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442", None))
-        self.checkBox.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.by", None))
-        self.checkBox_3.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e", None))
-        self.checkBox_4.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435", None))
-        self.label_4.setText(QCoreApplication.translate("Form", u"x", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
-        self.label_3.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
-        self.radioButton_3.setText(QCoreApplication.translate("Form", u"Vanilla", None))
-        self.radioButton_2.setText(QCoreApplication.translate("Form", u"Forge", None))
-        self.radioButton.setText(QCoreApplication.translate("Form", u"Fabric", None))
-        self.radioButton_4.setText(QCoreApplication.translate("Form", u"\u041a\u0430\u0441\u0442\u043e\u043c", None))
-        self.comboBox_3.setItemText(0, QCoreApplication.translate("Form", u"Impact", None))
-        self.comboBox_3.setItemText(1, QCoreApplication.translate("Form", u"Ares", None))
-        self.comboBox_3.setItemText(2, QCoreApplication.translate("Form", u"BatMod", None))
-        self.comboBox_3.setItemText(3, QCoreApplication.translate("Form", u"LabyMod", None))
+        self.update_versions.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
+        self.update_jsons.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442", None))
+        self.integrate_elyby.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.by", None))
+        self.demo_mode.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e", None))
+        self.custom_resolution.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435", None))
+        self.x_label.setText(QCoreApplication.translate("Form", u"x", None))
+        self.play_button.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
+        self.install_label.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
+        self.install_button.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
+        self.vanilla_radio.setText(QCoreApplication.translate("Form", u"Vanilla", None))
+        self.forge_radio.setText(QCoreApplication.translate("Form", u"Forge", None))
+        self.fabric_radio.setText(QCoreApplication.translate("Form", u"Fabric", None))
+        self.custom_client_radio.setText(QCoreApplication.translate("Form", u"\u041a\u0430\u0441\u0442\u043e\u043c", None))
+        self.custom_client_combo.setItemText(0, QCoreApplication.translate("Form", u"Impact", None))
+        self.custom_client_combo.setItemText(1, QCoreApplication.translate("Form", u"Ares", None))
+        self.custom_client_combo.setItemText(2, QCoreApplication.translate("Form", u"BatMod", None))
+        self.custom_client_combo.setItemText(3, QCoreApplication.translate("Form", u"LabyMod", None))
 
-        self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
-        self.radioButton_5.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u0435\u0442\u043b\u0430\u044f", None))
-        self.radioButton_6.setText(QCoreApplication.translate("Form", u"\u0427\u0435\u0440\u043d\u0430\u044f", None))
-        self.label.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u0430\u0442\u0443\u0441", None))
-        self.progressBar.setFormat(QCoreApplication.translate("Form", u"%p%", None))
-        self.toolButton_3.setText(QCoreApplication.translate("Form", u"<< \u041d\u0430\u0437\u0430\u0434", None))
-        self.toolButton_5.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u0438", None))
-        self.label_5.setText(QCoreApplication.translate("Form", u"\u0412\u0441\u0435\u0433\u043e \u043d\u043e\u0432\u043e\u0441\u0442\u0435\u0439: 0", None))
-        self.textEdit.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.news_button.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
+        self.light_radio.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u0435\u0442\u043b\u0430\u044f", None))
+        self.dark_radio.setText(QCoreApplication.translate("Form", u"\u0427\u0435\u0440\u043d\u0430\u044f", None))
+        self.status_label.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u0430\u0442\u0443\u0441", None))
+        self.status_progressbar.setFormat(QCoreApplication.translate("Form", u"%p%", None))
+        self.back_button.setText(QCoreApplication.translate("Form", u"<< \u041d\u0430\u0437\u0430\u0434", None))
+        self.update_button.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u0438", None))
+        self.news_count_label.setText(QCoreApplication.translate("Form", u"\u0412\u0441\u0435\u0433\u043e \u043d\u043e\u0432\u043e\u0441\u0442\u0435\u0439: 0", None))
+        self.news_page_text_edit.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"

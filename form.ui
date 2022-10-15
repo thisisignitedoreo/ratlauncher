@@ -19,35 +19,35 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QStackedWidget" name="stackedWidget">
+    <widget class="QStackedWidget" name="st_widget_main">
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="page">
+     <widget class="QWidget" name="play_page">
       <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="left_layout">
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="game_label">
            <property name="text">
             <string>Игра</string>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <layout class="QHBoxLayout" name="account_layout">
            <item>
-            <widget class="QComboBox" name="comboBox_2"/>
+            <widget class="QComboBox" name="account_combo"/>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_4">
+            <widget class="QToolButton" name="add_account">
              <property name="text">
               <string>+</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton_2">
+            <widget class="QToolButton" name="delete_account">
              <property name="text">
               <string>X</string>
              </property>
@@ -56,9 +56,9 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QHBoxLayout" name="version_layout">
            <item>
-            <widget class="QComboBox" name="comboBox">
+            <widget class="QComboBox" name="version_combo">
              <property name="toolTip">
               <string>Версия</string>
              </property>
@@ -68,7 +68,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="toolButton">
+            <widget class="QToolButton" name="update_versions">
              <property name="text">
               <string>Обновить</string>
              </property>
@@ -77,9 +77,9 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <layout class="QHBoxLayout" name="settings_layout_1">
            <item>
-            <widget class="QCheckBox" name="checkBox_2">
+            <widget class="QCheckBox" name="update_jsons">
              <property name="text">
               <string>Обновить клиент</string>
              </property>
@@ -89,7 +89,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox">
+            <widget class="QCheckBox" name="integrate_elyby">
              <property name="text">
               <string>Интеграция Ely.by</string>
              </property>
@@ -101,16 +101,16 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <layout class="QHBoxLayout" name="settings_layout_2">
            <item>
-            <widget class="QCheckBox" name="checkBox_3">
+            <widget class="QCheckBox" name="demo_mode">
              <property name="text">
               <string>Демо</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_4">
+            <widget class="QCheckBox" name="custom_resolution">
              <property name="text">
               <string>Свое разрешение</string>
              </property>
@@ -119,23 +119,26 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <layout class="QHBoxLayout" name="resolution_layout">
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="w_res">
              <property name="enabled">
               <bool>false</bool>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="x_label">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>x</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="h_res">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -144,7 +147,7 @@
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer">
+          <spacer name="v_spacer_1">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -157,7 +160,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="play_button">
            <property name="text">
             <string>Играть</string>
            </property>
@@ -166,21 +169,21 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="right_layout">
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="install_label">
            <property name="text">
             <string>Установка</string>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <layout class="QHBoxLayout" name="version_install_layout">
            <item>
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="QLineEdit" name="version_lineedit"/>
            </item>
            <item>
-            <widget class="QToolButton" name="pushButton">
+            <widget class="QToolButton" name="install_button">
              <property name="text">
               <string>Установить</string>
              </property>
@@ -189,9 +192,9 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="type_layout">
            <item>
-            <widget class="QRadioButton" name="radioButton_3">
+            <widget class="QRadioButton" name="vanilla_radio">
              <property name="text">
               <string>Vanilla</string>
              </property>
@@ -199,12 +202,12 @@
               <bool>true</bool>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">btn_group_1</string>
              </attribute>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_2">
+            <widget class="QRadioButton" name="forge_radio">
              <property name="text">
               <string>Forge</string>
              </property>
@@ -212,22 +215,22 @@
               <bool>false</bool>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">btn_group_1</string>
              </attribute>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton">
+            <widget class="QRadioButton" name="fabric_radio">
              <property name="text">
               <string>Fabric</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">btn_group_1</string>
              </attribute>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_4">
+            <widget class="QRadioButton" name="custom_client_radio">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -235,14 +238,14 @@
               <string>Кастом</string>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup</string>
+              <string notr="true">btn_group_1</string>
              </attribute>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3">
+          <widget class="QComboBox" name="custom_client_combo">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -269,7 +272,7 @@
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_2">
+          <spacer name="v_spacer_2">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -282,16 +285,16 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="news_button">
            <property name="text">
             <string>Новости с minecraft.net...</string>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <layout class="QHBoxLayout" name="theme_layout">
            <item>
-            <widget class="QRadioButton" name="radioButton_5">
+            <widget class="QRadioButton" name="light_radio">
              <property name="text">
               <string>Светлая</string>
              </property>
@@ -299,12 +302,12 @@
               <bool>true</bool>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup_2</string>
+              <string notr="true">btn_group_2</string>
              </attribute>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_6">
+            <widget class="QRadioButton" name="dark_radio">
              <property name="text">
               <string>Черная</string>
              </property>
@@ -312,21 +315,21 @@
               <bool>false</bool>
              </property>
              <attribute name="buttonGroup">
-              <string notr="true">buttonGroup_2</string>
+              <string notr="true">btn_group_2</string>
              </attribute>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="status_label">
            <property name="text">
             <string>Статус</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QProgressBar" name="progressBar">
+          <widget class="QProgressBar" name="status_progressbar">
            <property name="value">
             <number>0</number>
            </property>
@@ -339,26 +342,26 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_2">
+     <widget class="QWidget" name="news_page">
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <layout class="QHBoxLayout" name="toolbar_layout">
          <item>
-          <widget class="QToolButton" name="toolButton_3">
+          <widget class="QToolButton" name="back_button">
            <property name="text">
             <string>&lt;&lt; Назад</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton_5">
+          <widget class="QToolButton" name="update_button">
            <property name="text">
             <string>Обновить новости</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="news_count_label">
            <property name="text">
             <string>Всего новостей: 0</string>
            </property>
@@ -367,18 +370,18 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_11">
+        <layout class="QHBoxLayout" name="main_layout">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="left_layout_news">
            <item>
-            <widget class="QListWidget" name="listWidget"/>
+            <widget class="QListWidget" name="news_list"/>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="right_layout_news">
            <item>
-            <widget class="QTextEdit" name="textEdit">
+            <widget class="QTextEdit" name="news_page_text_edit">
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -404,7 +407,7 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="btn_group_1"/>
+  <buttongroup name="btn_group_2"/>
  </buttongroups>
 </ui>
