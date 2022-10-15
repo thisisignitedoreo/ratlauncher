@@ -15,7 +15,7 @@ import sys
 import os
 
 if not os.path.isfile("settings.json"):
-    open("accounts.json", "w").write("{\"theme\": \"white\"}")
+    open("settings.json", "w").write("{\"theme\": \"white\"}")
 
 if not os.path.isfile("accounts.json"):
     open("accounts.json", "w").write(f"[\"RatUser_{random.randint(100000, 999999)}\"]")
