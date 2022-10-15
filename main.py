@@ -196,10 +196,16 @@ class RatLauncher(QtWidgets.QWidget):
                 app.setPalette(self.white_palette)
                 app.setStyleSheet("")
                 settings["theme"] = "white"
+                self.ui.add_account.setIcon(QtGui.QIcon(":/icons/add_black.svg"))
+                self.ui.delete_account.setIcon(QtGui.QIcon(":/icons/del_black.svg"))
+                self.ui.update_versions.setIcon(QtGui.QIcon(":/icons/refresh_black.svg"))
             case True:
                 app.setPalette(self.dark_palette)
                 app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
                 settings["theme"] = "dark"
+                self.ui.add_account.setIcon(QtGui.QIcon(":/icons/add_white.svg"))
+                self.ui.delete_account.setIcon(QtGui.QIcon(":/icons/del_white.svg"))
+                self.ui.update_versions.setIcon(QtGui.QIcon(":/icons/refresh_white.svg"))
         with open("settings.json", "w") as file:
             file.write(json.dumps(settings))
 

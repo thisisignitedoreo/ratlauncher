@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox,
     QListWidgetItem, QProgressBar, QPushButton, QRadioButton,
     QSizePolicy, QSpacerItem, QStackedWidget, QTextEdit,
     QToolButton, QVBoxLayout, QWidget)
+import res_rc
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -27,7 +28,7 @@ class Ui_Form(object):
             Form.setObjectName(u"Form")
         Form.resize(571, 356)
         icon = QIcon()
-        icon.addFile(u"dependences/icon.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icons/dependences/icon.ico", QSize(), QIcon.Normal, QIcon.Off)
         Form.setWindowIcon(icon)
         self.horizontalLayout = QHBoxLayout(Form)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -53,11 +54,17 @@ class Ui_Form(object):
 
         self.add_account = QToolButton(self.play_page)
         self.add_account.setObjectName(u"add_account")
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/add_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.add_account.setIcon(icon1)
 
         self.account_layout.addWidget(self.add_account)
 
         self.delete_account = QToolButton(self.play_page)
         self.delete_account.setObjectName(u"delete_account")
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/del_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.delete_account.setIcon(icon2)
 
         self.account_layout.addWidget(self.delete_account)
 
@@ -73,6 +80,9 @@ class Ui_Form(object):
 
         self.update_versions = QToolButton(self.play_page)
         self.update_versions.setObjectName(u"update_versions")
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/refresh_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.update_versions.setIcon(icon3)
 
         self.version_layout.addWidget(self.update_versions)
 
@@ -323,15 +333,15 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"RatLauncher", None))
         self.game_label.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430", None))
-        self.add_account.setText(QCoreApplication.translate("Form", u"+", None))
-        self.delete_account.setText(QCoreApplication.translate("Form", u"X", None))
+        self.add_account.setText("")
+        self.delete_account.setText("")
 #if QT_CONFIG(tooltip)
         self.version_combo.setToolTip(QCoreApplication.translate("Form", u"\u0412\u0435\u0440\u0441\u0438\u044f", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(accessibility)
         self.version_combo.setAccessibleName("")
 #endif // QT_CONFIG(accessibility)
-        self.update_versions.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
+        self.update_versions.setText("")
         self.update_jsons.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442", None))
         self.integrate_elyby.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.by", None))
         self.demo_mode.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e", None))
