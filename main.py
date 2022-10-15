@@ -14,6 +14,9 @@ import json
 import sys
 import os
 
+if not os.path.isfile("settings.json"):
+    open("accounts.json", "w").write("{\"theme\": \"white\"}")
+
 if not os.path.isfile("accounts.json"):
     open("accounts.json", "w").write(f"[\"RatUser_{random.randint(100000, 999999)}\"]")
 
@@ -22,9 +25,6 @@ with open("accounts.json") as acc:
 
 with open("settings.json") as settings:
     settings = json.load(settings)
-
-if not settings:
-    settings = {"theme": "white"}
 
 class RatLauncher(QtWidgets.QWidget):
     def __init__(self):
