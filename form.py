@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.3.2
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,18 +15,19 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox,
-    QHBoxLayout, QLabel, QLineEdit, QListWidget,
-    QListWidgetItem, QProgressBar, QPushButton, QRadioButton,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTextEdit,
-    QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QButtonGroup, QCheckBox,
+    QComboBox, QHBoxLayout, QLabel, QLineEdit,
+    QListWidget, QListWidgetItem, QProgressBar, QPushButton,
+    QRadioButton, QSizePolicy, QSpacerItem, QSpinBox,
+    QStackedWidget, QTextEdit, QToolButton, QVBoxLayout,
+    QWidget)
 import res_rc
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(571, 356)
+        Form.resize(618, 437)
         icon = QIcon()
         icon.addFile(u":/icons/dependences/icon.ico", QSize(), QIcon.Normal, QIcon.Off)
         Form.setWindowIcon(icon)
@@ -36,8 +37,16 @@ class Ui_Form(object):
         self.st_widget_main.setObjectName(u"st_widget_main")
         self.play_page = QWidget()
         self.play_page.setObjectName(u"play_page")
+        self.play_page.setAutoFillBackground(False)
         self.horizontalLayout_10 = QHBoxLayout(self.play_page)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.vlayout_2 = QVBoxLayout()
+        self.vlayout_2.setObjectName(u"vlayout_2")
+        self.vlayout_2.setContentsMargins(-1, -1, 3, -1)
+        self.hlayout = QHBoxLayout()
+        self.hlayout.setSpacing(6)
+        self.hlayout.setObjectName(u"hlayout")
+        self.hlayout.setContentsMargins(-1, 0, -1, -1)
         self.left_layout = QVBoxLayout()
         self.left_layout.setObjectName(u"left_layout")
         self.game_label = QLabel(self.play_page)
@@ -89,64 +98,23 @@ class Ui_Form(object):
 
         self.left_layout.addLayout(self.version_layout)
 
-        self.settings_layout_1 = QHBoxLayout()
-        self.settings_layout_1.setObjectName(u"settings_layout_1")
-        self.update_jsons = QCheckBox(self.play_page)
-        self.update_jsons.setObjectName(u"update_jsons")
-        self.update_jsons.setChecked(True)
+        self.hspacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.settings_layout_1.addWidget(self.update_jsons)
-
-        self.integrate_elyby = QCheckBox(self.play_page)
-        self.integrate_elyby.setObjectName(u"integrate_elyby")
-        self.integrate_elyby.setChecked(True)
-
-        self.settings_layout_1.addWidget(self.integrate_elyby)
-
-
-        self.left_layout.addLayout(self.settings_layout_1)
-
-        self.settings_layout_2 = QHBoxLayout()
-        self.settings_layout_2.setObjectName(u"settings_layout_2")
-        self.demo_mode = QCheckBox(self.play_page)
-        self.demo_mode.setObjectName(u"demo_mode")
-
-        self.settings_layout_2.addWidget(self.demo_mode)
-
-        self.custom_resolution = QCheckBox(self.play_page)
-        self.custom_resolution.setObjectName(u"custom_resolution")
-
-        self.settings_layout_2.addWidget(self.custom_resolution)
-
-
-        self.left_layout.addLayout(self.settings_layout_2)
-
-        self.resolution_layout = QHBoxLayout()
-        self.resolution_layout.setObjectName(u"resolution_layout")
-        self.w_res = QLineEdit(self.play_page)
-        self.w_res.setObjectName(u"w_res")
-        self.w_res.setEnabled(False)
-
-        self.resolution_layout.addWidget(self.w_res)
-
-        self.x_label = QLabel(self.play_page)
-        self.x_label.setObjectName(u"x_label")
-        self.x_label.setEnabled(False)
-
-        self.resolution_layout.addWidget(self.x_label)
-
-        self.h_res = QLineEdit(self.play_page)
-        self.h_res.setObjectName(u"h_res")
-        self.h_res.setEnabled(False)
-
-        self.resolution_layout.addWidget(self.h_res)
-
-
-        self.left_layout.addLayout(self.resolution_layout)
+        self.left_layout.addItem(self.hspacer)
 
         self.v_spacer_1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.left_layout.addItem(self.v_spacer_1)
+
+        self.news_button = QPushButton(self.play_page)
+        self.news_button.setObjectName(u"news_button")
+
+        self.left_layout.addWidget(self.news_button)
+
+        self.settings_button = QPushButton(self.play_page)
+        self.settings_button.setObjectName(u"settings_button")
+
+        self.left_layout.addWidget(self.settings_button)
 
         self.play_button = QPushButton(self.play_page)
         self.play_button.setObjectName(u"play_button")
@@ -154,10 +122,11 @@ class Ui_Form(object):
         self.left_layout.addWidget(self.play_button)
 
 
-        self.horizontalLayout_10.addLayout(self.left_layout)
+        self.hlayout.addLayout(self.left_layout)
 
         self.right_layout = QVBoxLayout()
         self.right_layout.setObjectName(u"right_layout")
+        self.right_layout.setContentsMargins(-1, 0, -1, -1)
         self.install_label = QLabel(self.play_page)
         self.install_label.setObjectName(u"install_label")
 
@@ -226,32 +195,6 @@ class Ui_Form(object):
 
         self.right_layout.addItem(self.v_spacer_2)
 
-        self.news_button = QPushButton(self.play_page)
-        self.news_button.setObjectName(u"news_button")
-
-        self.right_layout.addWidget(self.news_button)
-
-        self.theme_layout = QHBoxLayout()
-        self.theme_layout.setObjectName(u"theme_layout")
-        self.light_radio = QRadioButton(self.play_page)
-        self.btn_group_2 = QButtonGroup(Form)
-        self.btn_group_2.setObjectName(u"btn_group_2")
-        self.btn_group_2.addButton(self.light_radio)
-        self.light_radio.setObjectName(u"light_radio")
-        self.light_radio.setChecked(True)
-
-        self.theme_layout.addWidget(self.light_radio)
-
-        self.dark_radio = QRadioButton(self.play_page)
-        self.btn_group_2.addButton(self.dark_radio)
-        self.dark_radio.setObjectName(u"dark_radio")
-        self.dark_radio.setChecked(False)
-
-        self.theme_layout.addWidget(self.dark_radio)
-
-
-        self.right_layout.addLayout(self.theme_layout)
-
         self.status_label = QLabel(self.play_page)
         self.status_label.setObjectName(u"status_label")
 
@@ -264,9 +207,232 @@ class Ui_Form(object):
         self.right_layout.addWidget(self.status_progressbar)
 
 
-        self.horizontalLayout_10.addLayout(self.right_layout)
+        self.hlayout.addLayout(self.right_layout)
+
+
+        self.vlayout_2.addLayout(self.hlayout)
+
+        self.ad_layout_2 = QWidget(self.play_page)
+        self.ad_layout_2.setObjectName(u"ad_layout_2")
+        self.ad_layout = QVBoxLayout(self.ad_layout_2)
+        self.ad_layout.setObjectName(u"ad_layout")
+        self.ad_layout.setContentsMargins(-1, 1, -1, -1)
+        self.close_button = QToolButton(self.ad_layout_2)
+        self.close_button.setObjectName(u"close_button")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/close_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.close_button.setIcon(icon4)
+
+        self.ad_layout.addWidget(self.close_button)
+
+        self.image_label = QLabel(self.ad_layout_2)
+        self.image_label.setObjectName(u"image_label")
+        self.image_label.setAlignment(Qt.AlignCenter)
+
+        self.ad_layout.addWidget(self.image_label)
+
+        self.desc_label = QLabel(self.ad_layout_2)
+        self.desc_label.setObjectName(u"desc_label")
+        self.desc_label.setTextFormat(Qt.MarkdownText)
+        self.desc_label.setAlignment(Qt.AlignCenter)
+
+        self.ad_layout.addWidget(self.desc_label)
+
+        self.ip_label = QLabel(self.ad_layout_2)
+        self.ip_label.setObjectName(u"ip_label")
+        self.ip_label.setCursor(QCursor(Qt.ArrowCursor))
+        self.ip_label.setTextFormat(Qt.MarkdownText)
+        self.ip_label.setAlignment(Qt.AlignCenter)
+
+        self.ad_layout.addWidget(self.ip_label)
+
+
+        self.vlayout_2.addWidget(self.ad_layout_2)
+
+
+        self.horizontalLayout_10.addLayout(self.vlayout_2)
 
         self.st_widget_main.addWidget(self.play_page)
+        self.settings_page = QWidget()
+        self.settings_page.setObjectName(u"settings_page")
+        self.horizontalLayout_2 = QHBoxLayout(self.settings_page)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.vlayout_3 = QVBoxLayout()
+        self.vlayout_3.setObjectName(u"vlayout_3")
+        self.hlayout_3 = QHBoxLayout()
+        self.hlayout_3.setObjectName(u"hlayout_3")
+        self.back_button_2 = QPushButton(self.settings_page)
+        self.back_button_2.setObjectName(u"back_button_2")
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.back_button_2.sizePolicy().hasHeightForWidth())
+        self.back_button_2.setSizePolicy(sizePolicy)
+
+        self.hlayout_3.addWidget(self.back_button_2)
+
+        self.settings_label = QLabel(self.settings_page)
+        self.settings_label.setObjectName(u"settings_label")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.settings_label.sizePolicy().hasHeightForWidth())
+        self.settings_label.setSizePolicy(sizePolicy1)
+
+        self.hlayout_3.addWidget(self.settings_label)
+
+
+        self.vlayout_3.addLayout(self.hlayout_3)
+
+        self.hlayout_4 = QHBoxLayout()
+        self.hlayout_4.setObjectName(u"hlayout_4")
+        self.hlayout_4.setContentsMargins(-1, 0, -1, -1)
+        self.ad_checkbox = QCheckBox(self.settings_page)
+        self.ad_checkbox.setObjectName(u"ad_checkbox")
+        self.ad_checkbox.setChecked(True)
+        self.ad_checkbox.setTristate(False)
+
+        self.hlayout_4.addWidget(self.ad_checkbox)
+
+        self.warn_label = QLabel(self.settings_page)
+        self.warn_label.setObjectName(u"warn_label")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.warn_label.sizePolicy().hasHeightForWidth())
+        self.warn_label.setSizePolicy(sizePolicy2)
+        self.warn_label.setTextFormat(Qt.MarkdownText)
+        self.warn_label.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.warn_label.setTextInteractionFlags(Qt.NoTextInteraction)
+
+        self.hlayout_4.addWidget(self.warn_label)
+
+
+        self.vlayout_3.addLayout(self.hlayout_4)
+
+        self.hlayout_5 = QHBoxLayout()
+        self.hlayout_5.setObjectName(u"hlayout_5")
+        self.hlayout_5.setContentsMargins(-1, 0, -1, -1)
+        self.theme_laybel = QLabel(self.settings_page)
+        self.theme_laybel.setObjectName(u"theme_laybel")
+
+        self.hlayout_5.addWidget(self.theme_laybel)
+
+        self.theme_combo = QComboBox(self.settings_page)
+        self.theme_combo.addItem("")
+        self.theme_combo.addItem("")
+        self.theme_combo.setObjectName(u"theme_combo")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.theme_combo.sizePolicy().hasHeightForWidth())
+        self.theme_combo.setSizePolicy(sizePolicy3)
+
+        self.hlayout_5.addWidget(self.theme_combo)
+
+
+        self.vlayout_3.addLayout(self.hlayout_5)
+
+        self.update_jsons = QCheckBox(self.settings_page)
+        self.update_jsons.setObjectName(u"update_jsons")
+        self.update_jsons.setChecked(True)
+
+        self.vlayout_3.addWidget(self.update_jsons)
+
+        self.integrate_elyby = QCheckBox(self.settings_page)
+        self.integrate_elyby.setObjectName(u"integrate_elyby")
+        self.integrate_elyby.setChecked(True)
+
+        self.vlayout_3.addWidget(self.integrate_elyby)
+
+        self.demo_mode = QCheckBox(self.settings_page)
+        self.demo_mode.setObjectName(u"demo_mode")
+
+        self.vlayout_3.addWidget(self.demo_mode)
+
+        self.hlayout_6 = QHBoxLayout()
+        self.hlayout_6.setObjectName(u"hlayout_6")
+        self.hlayout_6.setContentsMargins(-1, 0, -1, -1)
+        self.custom_resolution = QCheckBox(self.settings_page)
+        self.custom_resolution.setObjectName(u"custom_resolution")
+
+        self.hlayout_6.addWidget(self.custom_resolution)
+
+        self.w_res = QSpinBox(self.settings_page)
+        self.w_res.setObjectName(u"w_res")
+        self.w_res.setEnabled(False)
+        sizePolicy3.setHeightForWidth(self.w_res.sizePolicy().hasHeightForWidth())
+        self.w_res.setSizePolicy(sizePolicy3)
+        self.w_res.setMinimum(50)
+        self.w_res.setMaximum(10000)
+        self.w_res.setSingleStep(50)
+        self.w_res.setStepType(QAbstractSpinBox.DefaultStepType)
+        self.w_res.setValue(800)
+        self.w_res.setDisplayIntegerBase(10)
+
+        self.hlayout_6.addWidget(self.w_res)
+
+        self.x_label = QLabel(self.settings_page)
+        self.x_label.setObjectName(u"x_label")
+        self.x_label.setEnabled(False)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.x_label.sizePolicy().hasHeightForWidth())
+        self.x_label.setSizePolicy(sizePolicy4)
+
+        self.hlayout_6.addWidget(self.x_label)
+
+        self.h_res = QSpinBox(self.settings_page)
+        self.h_res.setObjectName(u"h_res")
+        self.h_res.setEnabled(False)
+        sizePolicy3.setHeightForWidth(self.h_res.sizePolicy().hasHeightForWidth())
+        self.h_res.setSizePolicy(sizePolicy3)
+        self.h_res.setMinimum(50)
+        self.h_res.setMaximum(10000)
+        self.h_res.setSingleStep(50)
+        self.h_res.setValue(600)
+
+        self.hlayout_6.addWidget(self.h_res)
+
+
+        self.vlayout_3.addLayout(self.hlayout_6)
+
+        self.hlayout_7 = QHBoxLayout()
+        self.hlayout_7.setObjectName(u"hlayout_7")
+        self.folder_label = QLabel(self.settings_page)
+        self.folder_label.setObjectName(u"folder_label")
+
+        self.hlayout_7.addWidget(self.folder_label)
+
+        self.folder_edit = QLineEdit(self.settings_page)
+        self.folder_edit.setObjectName(u"folder_edit")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.folder_edit.sizePolicy().hasHeightForWidth())
+        self.folder_edit.setSizePolicy(sizePolicy5)
+
+        self.hlayout_7.addWidget(self.folder_edit)
+
+
+        self.vlayout_3.addLayout(self.hlayout_7)
+
+        self.vspacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.vlayout_3.addItem(self.vspacer)
+
+        self.label = QLabel(self.settings_page)
+        self.label.setObjectName(u"label")
+        self.label.setTextFormat(Qt.MarkdownText)
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.vlayout_3.addWidget(self.label)
+
+
+        self.horizontalLayout_2.addLayout(self.vlayout_3)
+
+        self.st_widget_main.addWidget(self.settings_page)
         self.news_page = QWidget()
         self.news_page.setObjectName(u"news_page")
         self.verticalLayout_5 = QVBoxLayout(self.news_page)
@@ -324,7 +490,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.st_widget_main.setCurrentIndex(0)
+        self.st_widget_main.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -342,11 +508,8 @@ class Ui_Form(object):
         self.version_combo.setAccessibleName("")
 #endif // QT_CONFIG(accessibility)
         self.update_versions.setText("")
-        self.update_jsons.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043a\u043b\u0438\u0435\u043d\u0442", None))
-        self.integrate_elyby.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.by", None))
-        self.demo_mode.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e", None))
-        self.custom_resolution.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435", None))
-        self.x_label.setText(QCoreApplication.translate("Form", u"x", None))
+        self.news_button.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
+        self.settings_button.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.play_button.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
         self.install_label.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
         self.install_button.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
@@ -359,18 +522,38 @@ class Ui_Form(object):
         self.custom_client_combo.setItemText(2, QCoreApplication.translate("Form", u"BatMod", None))
         self.custom_client_combo.setItemText(3, QCoreApplication.translate("Form", u"LabyMod", None))
 
-        self.news_button.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
-        self.light_radio.setText(QCoreApplication.translate("Form", u"\u0421\u0432\u0435\u0442\u043b\u0430\u044f", None))
-        self.dark_radio.setText(QCoreApplication.translate("Form", u"\u0427\u0435\u0440\u043d\u0430\u044f", None))
         self.status_label.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u0430\u0442\u0443\u0441", None))
         self.status_progressbar.setFormat(QCoreApplication.translate("Form", u"%p%", None))
+        self.close_button.setText("")
+        self.image_label.setText("")
+        self.desc_label.setText("")
+        self.ip_label.setText("")
+        self.back_button_2.setText(QCoreApplication.translate("Form", u"<< \u041d\u0430\u0437\u0430\u0434", None))
+        self.settings_label.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
+        self.ad_checkbox.setText(QCoreApplication.translate("Form", u"\u0420\u0435\u043a\u043b\u0430\u043c\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u043e\u0432", None))
+        self.warn_label.setText(QCoreApplication.translate("Form", u"*\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0443\u0447\u0442\u0438\u0442\u0435 \u0447\u0442\u043e \u044f \u044d\u0442\u0438\u043c \u0434\u043e\u0431\u044b\u0432\u0430\u044e \u043f\u0440\u043e\u043f\u0438\u0442\u0430\u043d\u0438\u0435!*", None))
+        self.theme_laybel.setText(QCoreApplication.translate("Form", u"\u0422\u0435\u043c\u0430 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f:", None))
+        self.theme_combo.setItemText(0, QCoreApplication.translate("Form", u"\u0421\u0432\u0435\u0442\u043b\u0430\u044f", None))
+        self.theme_combo.setItemText(1, QCoreApplication.translate("Form", u"\u0422\u0435\u043c\u043d\u0430\u044f", None))
+
+        self.update_jsons.setText(QCoreApplication.translate("Form", u"\u0421\u043a\u0430\u0447\u0438\u0432\u0430\u043d\u0438\u0435 JSON", None))
+        self.integrate_elyby.setText(QCoreApplication.translate("Form", u"\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f Ely.By", None))
+        self.demo_mode.setText(QCoreApplication.translate("Form", u"\u0414\u0435\u043c\u043e \u0440\u0435\u0436\u0438\u043c", None))
+        self.custom_resolution.setText(QCoreApplication.translate("Form", u"\u041a\u0430\u0441\u0442\u043e\u043c\u043d\u043e\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435", None))
+        self.x_label.setText(QCoreApplication.translate("Form", u"x", None))
+        self.folder_label.setText(QCoreApplication.translate("Form", u"\u041f\u0430\u043f\u043a\u0430 \u0441 \u0438\u0433\u0440\u043e\u0439:", None))
+        self.folder_edit.setText(QCoreApplication.translate("Form", u"gamefiles", None))
+        self.label.setText(QCoreApplication.translate("Form", u"\u041d\u0430 \u0441\u0447\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u043f\u0438\u0448\u0438\u0442\u0435 _acid#9519_, \u0446\u0435\u043d\u0443 \u043e\u0431\u0441\u0443\u0434\u0438\u043c. \u041e\u0442\u0432\u0435\u0442\u0438\u0442\u044c \u043c\u043e\u0433\u0443 \u043d\u0435 \u0441\u0440\u0430\u0437\u0443!", None))
         self.back_button.setText(QCoreApplication.translate("Form", u"<< \u041d\u0430\u0437\u0430\u0434", None))
         self.update_button.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u0438", None))
         self.news_count_label.setText(QCoreApplication.translate("Form", u"\u0412\u0441\u0435\u0433\u043e \u043d\u043e\u0432\u043e\u0441\u0442\u0435\u0439: 0", None))
         self.news_page_text_edit.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:28pt;\">\u0412\u044b\u0431\u0435\u0440\u0438 \u043d\u043e\u0432\u043e\u0441\u0442\u044c \u0441\u043b\u0435\u0432\u0430!</span></p></body></html>", None))
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:28pt;\">\u0412\u044b\u0431\u0435\u0440\u0438 \u043d\u043e\u0432\u043e\u0441\u0442\u044c \u0441\u043b\u0435\u0432\u0430!</span></p></body></html>", None))
     # retranslateUi
 

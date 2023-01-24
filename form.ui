@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>356</height>
+    <width>618</width>
+    <height>437</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,121 +21,518 @@
    <item>
     <widget class="QStackedWidget" name="st_widget_main">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="play_page">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
-        <layout class="QVBoxLayout" name="left_layout">
+        <layout class="QVBoxLayout" name="vlayout_2">
+         <property name="rightMargin">
+          <number>3</number>
+         </property>
          <item>
-          <widget class="QLabel" name="game_label">
+          <layout class="QHBoxLayout" name="hlayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="left_layout">
+             <item>
+              <widget class="QLabel" name="game_label">
+               <property name="text">
+                <string>Игра</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="account_layout">
+               <item>
+                <widget class="QComboBox" name="account_combo"/>
+               </item>
+               <item>
+                <widget class="QToolButton" name="add_account">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="res.qrc">
+                   <normaloff>:/icons/add_black.svg</normaloff>:/icons/add_black.svg</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="delete_account">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="res.qrc">
+                   <normaloff>:/icons/del_black.svg</normaloff>:/icons/del_black.svg</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="version_layout">
+               <item>
+                <widget class="QComboBox" name="version_combo">
+                 <property name="toolTip">
+                  <string>Версия</string>
+                 </property>
+                 <property name="accessibleName">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="update_versions">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="res.qrc">
+                   <normaloff>:/icons/refresh_black.svg</normaloff>:/icons/refresh_black.svg</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="hspacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <spacer name="v_spacer_1">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="news_button">
+               <property name="text">
+                <string>Новости с minecraft.net...</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="settings_button">
+               <property name="text">
+                <string>Настройки</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="play_button">
+               <property name="text">
+                <string>Играть</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="right_layout">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="install_label">
+               <property name="text">
+                <string>Установка</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="version_install_layout">
+               <item>
+                <widget class="QLineEdit" name="version_lineedit"/>
+               </item>
+               <item>
+                <widget class="QToolButton" name="install_button">
+                 <property name="text">
+                  <string>Установить</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="type_layout">
+               <item>
+                <widget class="QRadioButton" name="vanilla_radio">
+                 <property name="text">
+                  <string>Vanilla</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">btn_group_1</string>
+                 </attribute>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="forge_radio">
+                 <property name="text">
+                  <string>Forge</string>
+                 </property>
+                 <property name="checked">
+                  <bool>false</bool>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">btn_group_1</string>
+                 </attribute>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="fabric_radio">
+                 <property name="text">
+                  <string>Fabric</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">btn_group_1</string>
+                 </attribute>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="custom_client_radio">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="text">
+                  <string>Кастом</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">btn_group_1</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QComboBox" name="custom_client_combo">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Impact</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Ares</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>BatMod</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>LabyMod</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <spacer name="v_spacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="status_label">
+               <property name="text">
+                <string>Статус</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QProgressBar" name="status_progressbar">
+               <property name="value">
+                <number>0</number>
+               </property>
+               <property name="format">
+                <string>%p%</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QWidget" name="ad_layout_2" native="true">
+           <layout class="QVBoxLayout" name="ad_layout">
+            <property name="topMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="QToolButton" name="close_button">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="res.qrc">
+                <normaloff>:/icons/close_black.svg</normaloff>:/icons/close_black.svg</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="image_label">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="desc_label">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::MarkdownText</enum>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="ip_label">
+              <property name="cursor">
+               <cursorShape>ArrowCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::MarkdownText</enum>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="settings_page">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="vlayout_3">
+         <item>
+          <layout class="QHBoxLayout" name="hlayout_3">
+           <item>
+            <widget class="QPushButton" name="back_button_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>&lt;&lt; Назад</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="settings_label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Настройки</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hlayout_4">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QCheckBox" name="ad_checkbox">
+             <property name="text">
+              <string>Реклама серверов</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="warn_label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>*Пожалуйста, учтите что я этим добываю пропитание!*</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::MarkdownText</enum>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::NoTextInteraction</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hlayout_5">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="theme_laybel">
+             <property name="text">
+              <string>Тема приложения:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="theme_combo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <item>
+              <property name="text">
+               <string>Светлая</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Темная</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="update_jsons">
            <property name="text">
-            <string>Игра</string>
+            <string>Скачивание JSON</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="account_layout">
-           <item>
-            <widget class="QComboBox" name="account_combo"/>
-           </item>
-           <item>
-            <widget class="QToolButton" name="add_account">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="res.qrc">
-               <normaloff>:/icons/add_black.svg</normaloff>:/icons/add_black.svg</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="delete_account">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="res.qrc">
-               <normaloff>:/icons/del_black.svg</normaloff>:/icons/del_black.svg</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QCheckBox" name="integrate_elyby">
+           <property name="text">
+            <string>Интеграция Ely.By</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="version_layout">
-           <item>
-            <widget class="QComboBox" name="version_combo">
-             <property name="toolTip">
-              <string>Версия</string>
-             </property>
-             <property name="accessibleName">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="update_versions">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="res.qrc">
-               <normaloff>:/icons/refresh_black.svg</normaloff>:/icons/refresh_black.svg</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QCheckBox" name="demo_mode">
+           <property name="text">
+            <string>Демо режим</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="settings_layout_1">
-           <item>
-            <widget class="QCheckBox" name="update_jsons">
-             <property name="text">
-              <string>Обновить клиент</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="integrate_elyby">
-             <property name="text">
-              <string>Интеграция Ely.by</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="settings_layout_2">
-           <item>
-            <widget class="QCheckBox" name="demo_mode">
-             <property name="text">
-              <string>Демо</string>
-             </property>
-            </widget>
-           </item>
+          <layout class="QHBoxLayout" name="hlayout_6">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QCheckBox" name="custom_resolution">
              <property name="text">
-              <string>Свое разрешение</string>
+              <string>Кастомное разрешение</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="resolution_layout">
            <item>
-            <widget class="QLineEdit" name="w_res">
+            <widget class="QSpinBox" name="w_res">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimum">
+              <number>50</number>
+             </property>
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="singleStep">
+              <number>50</number>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+             <property name="value">
+              <number>800</number>
+             </property>
+             <property name="displayIntegerBase">
+              <number>10</number>
              </property>
             </widget>
            </item>
@@ -144,24 +541,75 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>x</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="h_res">
+            <widget class="QSpinBox" name="h_res">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimum">
+              <number>50</number>
+             </property>
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="singleStep">
+              <number>50</number>
+             </property>
+             <property name="value">
+              <number>600</number>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <spacer name="v_spacer_1">
+          <layout class="QHBoxLayout" name="hlayout_7">
+           <item>
+            <widget class="QLabel" name="folder_label">
+             <property name="text">
+              <string>Папка с игрой:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="folder_edit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>gamefiles</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="vspacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -172,181 +620,15 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="play_button">
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Играть</string>
+            <string>На счет рекламы пишите _acid#9519_, цену обсудим. Ответить могу не сразу!</string>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="right_layout">
-         <item>
-          <widget class="QLabel" name="install_label">
-           <property name="text">
-            <string>Установка</string>
+           <property name="textFormat">
+            <enum>Qt::MarkdownText</enum>
            </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="version_install_layout">
-           <item>
-            <widget class="QLineEdit" name="version_lineedit"/>
-           </item>
-           <item>
-            <widget class="QToolButton" name="install_button">
-             <property name="text">
-              <string>Установить</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="type_layout">
-           <item>
-            <widget class="QRadioButton" name="vanilla_radio">
-             <property name="text">
-              <string>Vanilla</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_1</string>
-             </attribute>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="forge_radio">
-             <property name="text">
-              <string>Forge</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_1</string>
-             </attribute>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="fabric_radio">
-             <property name="text">
-              <string>Fabric</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_1</string>
-             </attribute>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="custom_client_radio">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="text">
-              <string>Кастом</string>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_1</string>
-             </attribute>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QComboBox" name="custom_client_combo">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <item>
-            <property name="text">
-             <string>Impact</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ares</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>BatMod</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>LabyMod</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <spacer name="v_spacer_2">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="news_button">
-           <property name="text">
-            <string>Новости с minecraft.net...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="theme_layout">
-           <item>
-            <widget class="QRadioButton" name="light_radio">
-             <property name="text">
-              <string>Светлая</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_2</string>
-             </attribute>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="dark_radio">
-             <property name="text">
-              <string>Черная</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">btn_group_2</string>
-             </attribute>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QLabel" name="status_label">
-           <property name="text">
-            <string>Статус</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QProgressBar" name="status_progressbar">
-           <property name="value">
-            <number>0</number>
-           </property>
-           <property name="format">
-            <string>%p%</string>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -399,10 +681,13 @@
              </property>
              <property name="html">
               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:28pt;&quot;&gt;Выбери новость слева!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:28pt;&quot;&gt;Выбери новость слева!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -422,6 +707,5 @@ p, li { white-space: pre-wrap; }
  <connections/>
  <buttongroups>
   <buttongroup name="btn_group_1"/>
-  <buttongroup name="btn_group_2"/>
  </buttongroups>
 </ui>
