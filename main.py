@@ -159,7 +159,7 @@ class RatLauncher(QtWidgets.QWidget):
             msg.exec()
 
     def download_file(self, url: str, pbar: QtWidgets.QProgressBar) -> bytes:
-        response = requests.get("https://adaf.xyz/adaf/hm/download/v34.18/b0fc84427313fb6168479888b3614da4f1004426987880ce5175a6d854069ed4/GDHM_TASBOT_v34.18.zip", stream=True)
+        response = requests.get(url, stream=True)
         total_length = response.headers.get('content-length')
         file = b""
 
