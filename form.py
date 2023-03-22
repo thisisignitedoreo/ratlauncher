@@ -43,6 +43,32 @@ class Ui_Form(object):
         self.vlayout_2 = QVBoxLayout()
         self.vlayout_2.setObjectName(u"vlayout_2")
         self.vlayout_2.setContentsMargins(-1, -1, 3, -1)
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.settings_button = QPushButton(self.play_page)
+        self.settings_button.setObjectName(u"settings_button")
+        sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.settings_button.sizePolicy().hasHeightForWidth())
+        self.settings_button.setSizePolicy(sizePolicy)
+
+        self.horizontalLayout_3.addWidget(self.settings_button)
+
+        self.news_button = QPushButton(self.play_page)
+        self.news_button.setObjectName(u"news_button")
+        sizePolicy.setHeightForWidth(self.news_button.sizePolicy().hasHeightForWidth())
+        self.news_button.setSizePolicy(sizePolicy)
+
+        self.horizontalLayout_3.addWidget(self.news_button)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer)
+
+
+        self.vlayout_2.addLayout(self.horizontalLayout_3)
+
         self.hlayout = QHBoxLayout()
         self.hlayout.setSpacing(6)
         self.hlayout.setObjectName(u"hlayout")
@@ -105,16 +131,6 @@ class Ui_Form(object):
         self.v_spacer_1 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.left_layout.addItem(self.v_spacer_1)
-
-        self.news_button = QPushButton(self.play_page)
-        self.news_button.setObjectName(u"news_button")
-
-        self.left_layout.addWidget(self.news_button)
-
-        self.settings_button = QPushButton(self.play_page)
-        self.settings_button.setObjectName(u"settings_button")
-
-        self.left_layout.addWidget(self.settings_button)
 
         self.play_button = QPushButton(self.play_page)
         self.play_button.setObjectName(u"play_button")
@@ -203,6 +219,7 @@ class Ui_Form(object):
         self.status_progressbar = QProgressBar(self.play_page)
         self.status_progressbar.setObjectName(u"status_progressbar")
         self.status_progressbar.setValue(0)
+        self.status_progressbar.setTextVisible(True)
 
         self.right_layout.addWidget(self.status_progressbar)
 
@@ -263,21 +280,21 @@ class Ui_Form(object):
         self.hlayout_3.setObjectName(u"hlayout_3")
         self.back_button_2 = QPushButton(self.settings_page)
         self.back_button_2.setObjectName(u"back_button_2")
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.back_button_2.sizePolicy().hasHeightForWidth())
-        self.back_button_2.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.back_button_2.sizePolicy().hasHeightForWidth())
+        self.back_button_2.setSizePolicy(sizePolicy1)
 
         self.hlayout_3.addWidget(self.back_button_2)
 
         self.settings_label = QLabel(self.settings_page)
         self.settings_label.setObjectName(u"settings_label")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.settings_label.sizePolicy().hasHeightForWidth())
-        self.settings_label.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.settings_label.sizePolicy().hasHeightForWidth())
+        self.settings_label.setSizePolicy(sizePolicy2)
 
         self.hlayout_3.addWidget(self.settings_label)
 
@@ -296,11 +313,11 @@ class Ui_Form(object):
 
         self.warn_label = QLabel(self.settings_page)
         self.warn_label.setObjectName(u"warn_label")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.warn_label.sizePolicy().hasHeightForWidth())
-        self.warn_label.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.warn_label.sizePolicy().hasHeightForWidth())
+        self.warn_label.setSizePolicy(sizePolicy3)
         self.warn_label.setTextFormat(Qt.MarkdownText)
         self.warn_label.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.warn_label.setTextInteractionFlags(Qt.NoTextInteraction)
@@ -322,11 +339,8 @@ class Ui_Form(object):
         self.theme_combo.addItem("")
         self.theme_combo.addItem("")
         self.theme_combo.setObjectName(u"theme_combo")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.theme_combo.sizePolicy().hasHeightForWidth())
-        self.theme_combo.setSizePolicy(sizePolicy3)
+        sizePolicy.setHeightForWidth(self.theme_combo.sizePolicy().hasHeightForWidth())
+        self.theme_combo.setSizePolicy(sizePolicy)
 
         self.hlayout_5.addWidget(self.theme_combo)
 
@@ -361,8 +375,8 @@ class Ui_Form(object):
         self.w_res = QSpinBox(self.settings_page)
         self.w_res.setObjectName(u"w_res")
         self.w_res.setEnabled(False)
-        sizePolicy3.setHeightForWidth(self.w_res.sizePolicy().hasHeightForWidth())
-        self.w_res.setSizePolicy(sizePolicy3)
+        sizePolicy.setHeightForWidth(self.w_res.sizePolicy().hasHeightForWidth())
+        self.w_res.setSizePolicy(sizePolicy)
         self.w_res.setMinimum(50)
         self.w_res.setMaximum(10000)
         self.w_res.setSingleStep(50)
@@ -386,8 +400,8 @@ class Ui_Form(object):
         self.h_res = QSpinBox(self.settings_page)
         self.h_res.setObjectName(u"h_res")
         self.h_res.setEnabled(False)
-        sizePolicy3.setHeightForWidth(self.h_res.sizePolicy().hasHeightForWidth())
-        self.h_res.setSizePolicy(sizePolicy3)
+        sizePolicy.setHeightForWidth(self.h_res.sizePolicy().hasHeightForWidth())
+        self.h_res.setSizePolicy(sizePolicy)
         self.h_res.setMinimum(50)
         self.h_res.setMaximum(10000)
         self.h_res.setSingleStep(50)
@@ -490,7 +504,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.st_widget_main.setCurrentIndex(1)
+        self.st_widget_main.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -498,6 +512,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"RatLauncher", None))
+        self.settings_button.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
+        self.news_button.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
         self.game_label.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430", None))
         self.add_account.setText("")
         self.delete_account.setText("")
@@ -508,8 +524,6 @@ class Ui_Form(object):
         self.version_combo.setAccessibleName("")
 #endif // QT_CONFIG(accessibility)
         self.update_versions.setText("")
-        self.news_button.setText(QCoreApplication.translate("Form", u"\u041d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441 minecraft.net...", None))
-        self.settings_button.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438", None))
         self.play_button.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
         self.install_label.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
         self.install_button.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
@@ -553,7 +567,7 @@ class Ui_Form(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:28pt;\">\u0412\u044b\u0431\u0435\u0440\u0438 \u043d\u043e\u0432\u043e\u0441\u0442\u044c \u0441\u043b\u0435\u0432\u0430!</span></p></body></html>", None))
     # retranslateUi
 

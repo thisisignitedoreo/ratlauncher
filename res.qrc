@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>close_black.svg</file>
+    <file>close_white.svg</file>
     <file>add_black.svg</file>
     <file>add_white.svg</file>
     <file>del_black.svg</file>

@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from form import Ui_Form
 import minecraft_launcher_lib as mll
 import subprocess
+import traceback
 import datetime
 import requests
 import random
@@ -19,6 +20,7 @@ if not os.path.isfile("settings.json"):
     open("settings.json", "w").write(
             json.dumps({
                     "theme": "white",
+                    "window_size": None,
                     "ads": True,
                     "json_down": True,
                     "elyby_integ": True,
@@ -62,8 +64,6 @@ class RatLauncher(QtWidgets.QWidget):
         self.dark_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(42, 130, 218))
         self.dark_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.Qt.black)
 
-
-
         match settings["theme"]:
             case "white":
                 self.ui.theme_combo.setCurrentIndex(0)
@@ -72,6 +72,7 @@ class RatLauncher(QtWidgets.QWidget):
                 self.ui.theme_combo.setCurrentIndex(1)
                 self.set_dark_theme(True)
 
+        self.fetch_ads()
         self.set_ads(settings["ads"])
         self.ui.ad_checkbox.setChecked(settings["ads"])
 
@@ -100,10 +101,16 @@ class RatLauncher(QtWidgets.QWidget):
 
         self.current_max = 0
 
+        self.ad_available = False
+
+        if settings["window_size"] is None:
+            settings["window_size"] = (self.frameGeometry().width(), self.frameGeometry().height())
+            self.save_settings()
+
+        self.resize(*settings["window_size"])
         self.fetch_accounts()
         self.update_version_list()
         self.connect_buttons()
-        self.fetch_ads()
 
     def mll_set_status(self, status: str) -> None:
         self.ui.status_label.setText(status)
@@ -117,9 +124,9 @@ class RatLauncher(QtWidgets.QWidget):
         self.ui.status_progressbar.setMaximum(new_max)
 
     def connect_buttons(self) -> None:
-        self.ui.update_versions.clicked.connect(self.update_version_list)
-        self.ui.install_button.clicked.connect(self.install_version)
-        self.ui.play_button.clicked.connect(self.run_game)
+        self.ui.update_versions.clicked.connect(lambda: self.handle_func(self.update_version_list))
+        self.ui.install_button.clicked.connect(lambda: self.handle_func(self.install_version))
+        self.ui.play_button.clicked.connect(lambda: self.handle_func(self.run_game))
         self.ui.custom_client_radio.toggled.connect(self.custom_client_activated)
         self.ui.add_account.clicked.connect(self.add_account)
         self.ui.delete_account.clicked.connect(self.del_account)
@@ -131,17 +138,45 @@ class RatLauncher(QtWidgets.QWidget):
         self.ui.news_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(2))
         self.ui.back_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
         self.ui.back_button_2.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
-        self.ui.news_button.clicked.connect(self.update_news)
-        self.ui.update_jsons.toggled.connect(self.save_options)
-        self.ui.integrate_elyby.toggled.connect(self.save_options)
-        self.ui.demo_mode.toggled.connect(self.save_options)
-        self.ui.custom_resolution.toggled.connect(self.save_options)
-        self.ui.w_res.valueChanged.connect(self.save_options)
-        self.ui.h_res.valueChanged.connect(self.save_options)
-        self.ui.news_list.itemDoubleClicked.connect(self.load_news)	
-        self.ui.folder_edit.returnPressed.connect(lambda: self.change_folder(self.ui.folder_edit.text()))	
+        self.ui.news_button.clicked.connect(lambda: self.handle_func(self.update_news))
+        self.ui.update_jsons.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.integrate_elyby.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.demo_mode.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.custom_resolution.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.w_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
+        self.ui.h_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
+        self.ui.news_list.itemDoubleClicked.connect(lambda x: self.handle_func(lambda: self.load_news(x)))
+        self.ui.folder_edit.returnPressed.connect(lambda: self.change_folder(self.ui.folder_edit.text()))
 
-    def save_options(self):
+    def handle_func(self, func):
+        try:
+            func()
+        except:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setWindowTitle("Ой!")
+            msg.setText("Что-то пошло не так...\nОшибка:\n" + traceback.format_exc())
+            msg.exec()
+
+    def download_file(self, url: str, pbar: QtWidgets.QProgressBar) -> bytes:
+        response = requests.get("https://adaf.xyz/adaf/hm/download/v34.18/b0fc84427313fb6168479888b3614da4f1004426987880ce5175a6d854069ed4/GDHM_TASBOT_v34.18.zip", stream=True)
+        total_length = response.headers.get('content-length')
+        file = b""
+
+        if total_length is None:
+            file += response.content
+        else:
+            dl = 0
+            total_length = int(total_length)
+            pbar.setMaximum(total_length)
+            for data in response.iter_content(chunk_size=65536):
+                app.processEvents()
+                dl += len(data)
+                file += data
+                pbar.setValue(dl)
+        return file
+
+    def save_options(self) -> None:
         settings["json_down"] = self.ui.update_jsons.isChecked()
         settings["elyby_integ"] = self.ui.integrate_elyby.isChecked()
         settings["demo"] = self.ui.demo_mode.isChecked()
@@ -150,22 +185,23 @@ class RatLauncher(QtWidgets.QWidget):
         settings["custom_res"][2] = self.ui.h_res.value()
         self.save_settings()
 
-    def change_folder(self, new_folder):
+    def change_folder(self, new_folder: str) -> None:
         self.minecraft_dir = new_folder
         self.update_version_list()
 
-    def fetch_ads(self):
+    def fetch_ads(self) -> None:
         banner = requests.get("https://ratlauncher.tk/server-banner.png").content
         qpix = QtGui.QPixmap()
         qpix.loadFromData(banner)
         qpix = qpix.scaled(560, 110)
         self.ui.image_label.setPixmap(qpix)
         ad_settings = json.loads(requests.get("https://ratlauncher.tk/ads.json").content)
+        self.ad_available = ad_settings["ads"]
         self.ui.desc_label.setText(ad_settings["md_description"])
         self.ui.ip_label.setText(f"*{ad_settings['ip']}*")
 
-    def set_ads(self, state):
-        if state:
+    def set_ads(self, state: bool) -> None:
+        if state and self.ad_available:
             self.ui.ad_layout_2.show()
         else:
             self.ui.ad_layout_2.hide()
@@ -173,12 +209,12 @@ class RatLauncher(QtWidgets.QWidget):
         self.ui.ad_checkbox.setChecked(state)
         self.save_options()
 
-    def save_settings(self):
+    def save_settings(self) -> None:
         open("settings.json", "w").write(
             json.dumps(settings)
         )
 
-    def update_news(self):
+    def update_news(self) -> None:
         self.news = mll.utils.get_minecraft_news(-1)
         self.news = mll.utils.get_minecraft_news(self.news["article_count"])
         self.ui.news_count_label.setText(f"Всего новостей: {self.news['article_count']}")
@@ -333,45 +369,31 @@ class RatLauncher(QtWidgets.QWidget):
                 return
         elif self.ui.custom_client_radio.isChecked():
             if str(self.ui.custom_client_combo.currentText()) == "Impact":
-                self.ui.status_progressbar.setMaximum(3)
                 self.ui.status_label.setText("Downloading ImpactInstaller.jar")
-                self.ui.status_progressbar.setValue(1)
-                response = requests.get("https://impactclient.net/ImpactInstaller.jar")
-                open(os.getenv("TEMP") + "/impactinstaller.jar", "wb").write(response.content)
+                file = self.download_file("https://impactclient.net/ImpactInstaller.jar", self.ui.status_progressbar)
+                open(os.getenv("TEMP") + "/impactinstaller.jar", "wb").write(file)
                 self.ui.status_label.setText("Running ImpactInstaller.jar")
-                self.ui.status_progressbar.setValue(2)
                 subprocess.call("java -jar " + os.getenv("TEMP") + "/impactinstaller.jar")
                 self.ui.status_label.setText("Installation completed")
             elif str(self.ui.custom_client_combo.currentText()) == "BatMod":
-                self.ui.status_progressbar.setMaximum(3)
                 self.ui.status_label.setText("Downloading BatMod_Installer.jar")
-                self.ui.status_progressbar.setValue(1)
-                response = requests.get("https://dl.batmod.com/go/download.php")
-                open(os.getenv("TEMP") + "/batmodinstaller.jar", "wb").write(response.content)
+                file = self.download_file("https://dl.batmod.com/go/download.php", self.ui.status_progressbar)
+                open(os.getenv("TEMP") + "/batmodinstaller.jar", "wb").write(file)
                 self.ui.status_label.setText("Running BatMod_Installer.jar")
-                self.ui.status_progressbar.setValue(2)
                 subprocess.call("java -jar " + os.getenv("TEMP") + "/batmodinstaller.jar")
                 self.ui.status_label.setText("Installation completed")
             elif str(self.ui.custom_client_combo.currentText()) == "Ares":
-                self.ui.status_progressbar.setMaximum(3)
                 self.ui.status_label.setText("Downloading AresInstaller.jar")
-                self.ui.status_progressbar.setValue(1)
-                response = requests.get("https://aresclient.org/downloads/stable/Ares-2.9-1.18.1.jar")
-                open(
-                    os.getenv("TEMP") + "/aresinstaller.jar",
-                    "wb").write(response.content)
+                file = self.download_file("https://aresclient.org/downloads/stable/Ares-2.9-1.18.1.jar", self.ui.status_progressbar)
+                open(os.getenv("TEMP") + "/aresinstaller.jar", "wb").write(file)
                 self.ui.status_label.setText("Running AresInstaller.jar")
-                self.ui.status_progressbar.setValue(2)
                 subprocess.call("java -jar " + os.getenv("TEMP") + "/aresinstaller.jar")
                 self.ui.status_label.setText("Installation completed")
             elif str(self.ui.custom_client_combo.currentText()) == "LabyMod":
-                self.ui.status_progressbar.setMaximum(3)
                 self.ui.status_label.setText("Downloading LabyMod3_Installer.jar")
-                self.ui.status_progressbar.setValue(1)
-                response = requests.get("https://dl.labymod.net/latest/install/LabyMod3_Installer.jar")
-                open(os.getenv("TEMP") + "/labyinstaller.jar", "wb").write(response.content)
+                file = self.download_file("https://dl.labymod.net/latest/install/LabyMod3_Installer.jar", self.ui.status_progressbar)
+                open(os.getenv("TEMP") + "/labyinstaller.jar", "wb").write(file)
                 self.ui.status_label.setText("Running LabyMod3_Installer.jar")
-                self.ui.status_progressbar.setValue(2)
                 subprocess.call("java -jar " + os.getenv("TEMP") + "/labyinstaller.jar")
                 self.ui.status_label.setText("Installation completed")
         if os.path.isdir(self.minecraft_dir):
@@ -379,8 +401,13 @@ class RatLauncher(QtWidgets.QWidget):
         self.ui.status_progressbar.setValue(0)
         self.update_version_list()
 
+    def resizeEvent(self, event):
+        settings["window_size"] = event.size().toTuple()
+        self.save_settings()
+        QtWidgets.QMainWindow.resizeEvent(self, event)
+
     def debug_print(self, string):
-        print(f"[{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}] DEBUG: {string}")
+        print(f"[{datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')}] DEBUG: {string}")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
