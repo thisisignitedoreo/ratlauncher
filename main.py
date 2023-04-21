@@ -27,6 +27,7 @@ if not os.path.isfile("settings.json"):
                     "demo": False,
                     "custom_res": [False, 800, 600],
                     "folder": "gamefiles",
+                    "filters": [False, True, True, True, True],
                 })
         )
 
@@ -94,6 +95,14 @@ class RatLauncher(QtWidgets.QWidget):
             "setMax": self.mll_set_max
         }
 
+        self.ui.snapshot_filter.setChecked(settings["filters"][0])
+        self.ui.alpha_filter.setChecked(settings["filters"][1])
+        self.ui.beta_filter.setChecked(settings["filters"][2])
+        self.ui.old_alpha_filter.setChecked(settings["filters"][3])
+        self.ui.old_beta_filter.setChecked(settings["filters"][4])
+
+        self.fetch_versions()
+
         self.htmlsession = HTMLSession()
 
         self.news = {}
@@ -124,29 +133,35 @@ class RatLauncher(QtWidgets.QWidget):
         self.ui.status_progressbar.setMaximum(new_max)
 
     def connect_buttons(self) -> None:
-        self.ui.update_versions.clicked.connect(lambda: self.handle_func(self.update_version_list))
-        self.ui.install_button.clicked.connect(lambda: self.handle_func(self.install_version))
-        self.ui.play_button.clicked.connect(lambda: self.handle_func(self.run_game))
-        self.ui.custom_client_radio.toggled.connect(self.custom_client_activated)
-        self.ui.add_account.clicked.connect(self.add_account)
-        self.ui.delete_account.clicked.connect(self.del_account)
-        self.ui.custom_resolution.toggled.connect(self.custom_resolution)
-        self.ui.ad_checkbox.clicked.connect(lambda: self.set_ads(not settings["ads"]))
-        self.ui.close_button.clicked.connect(lambda: self.set_ads(False))
-        self.ui.theme_combo.currentIndexChanged.connect(self.set_dark_theme)
-        self.ui.settings_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(1))
-        self.ui.news_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(2))
-        self.ui.back_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
-        self.ui.back_button_2.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
-        self.ui.news_button.clicked.connect(lambda: self.handle_func(self.update_news))
-        self.ui.update_jsons.toggled.connect(lambda: self.handle_func(self.save_options))
-        self.ui.integrate_elyby.toggled.connect(lambda: self.handle_func(self.save_options))
-        self.ui.demo_mode.toggled.connect(lambda: self.handle_func(self.save_options))
-        self.ui.custom_resolution.toggled.connect(lambda: self.handle_func(self.save_options))
-        self.ui.w_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
-        self.ui.h_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
         self.ui.news_list.itemDoubleClicked.connect(lambda x: self.handle_func(lambda: self.load_news(x)))
         self.ui.folder_edit.returnPressed.connect(lambda: self.change_folder(self.ui.folder_edit.text()))
+        self.ui.update_versions_button.clicked.connect(lambda: self.handle_func(self.fetch_versions))
+        self.ui.update_versions.clicked.connect(lambda: self.handle_func(self.update_version_list))
+        self.ui.settings_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(1))
+        self.ui.back_button_2.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
+        self.ui.news_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(2))
+        self.ui.back_button.clicked.connect(lambda: self.ui.st_widget_main.setCurrentIndex(0))
+        self.ui.custom_resolution.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.install_button.clicked.connect(lambda: self.handle_func(self.install_version))
+        self.ui.old_alpha_filter.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.old_beta_filter.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.integrate_elyby.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.snapshot_filter.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.update_jsons.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.alpha_filter.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.beta_filter.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.w_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
+        self.ui.news_button.clicked.connect(lambda: self.handle_func(self.update_news))
+        self.ui.h_res.valueChanged.connect(lambda: self.handle_func(self.save_options))
+        self.ui.demo_mode.toggled.connect(lambda: self.handle_func(self.save_options))
+        self.ui.ad_checkbox.clicked.connect(lambda: self.set_ads(not settings["ads"]))
+        self.ui.play_button.clicked.connect(lambda: self.handle_func(self.run_game))
+        self.ui.custom_client_radio.toggled.connect(self.custom_client_activated)
+        self.ui.theme_combo.currentIndexChanged.connect(self.set_dark_theme)
+        self.ui.close_button.clicked.connect(lambda: self.set_ads(False))
+        self.ui.custom_resolution.toggled.connect(self.custom_resolution)
+        self.ui.delete_account.clicked.connect(self.del_account)
+        self.ui.add_account.clicked.connect(self.add_account)
 
     def handle_func(self, func):
         try:
@@ -157,6 +172,31 @@ class RatLauncher(QtWidgets.QWidget):
             msg.setWindowTitle("Ой!")
             msg.setText("Что-то пошло не так...\nОшибка:\n" + traceback.format_exc())
             msg.exec()
+
+    def fetch_versions(self):
+        versions = mll.utils.get_version_list()
+
+        filter_list = [
+            "snapshot" if not self.ui.snapshot_filter.isChecked() else None,
+            "beta" if not self.ui.beta_filter.isChecked() else None,
+            "alpha" if not self.ui.alpha_filter.isChecked() else None,
+            "old_alpha" if not self.ui.old_alpha_filter.isChecked() else None,
+            "old_beta" if not self.ui.old_beta_filter.isChecked() else None,
+        ]
+
+        type_to_url = {
+            "snapshot": self.get_head_as_qicon_from_nickname("MHF_Cow"),
+            "release": self.get_head_as_qicon_from_nickname("MHF_Steve"),
+            "alpha": self.get_head_as_qicon_from_nickname("MHF_Chicken"),
+            "old_alpha": self.get_head_as_qicon_from_nickname("MHF_Chicken"),
+            "beta": self.get_head_as_qicon_from_nickname("MHF_Chicken"),
+            "old_beta": self.get_head_as_qicon_from_nickname("MHF_Chicken"),
+        }
+
+        self.ui.install_version_combo.clear()
+        for i in versions:
+            if i["type"] not in filter_list:
+                self.ui.install_version_combo.addItem(type_to_url[i["type"]], i["id"])
 
     def download_file(self, url: str, pbar: QtWidgets.QProgressBar) -> bytes:
         response = requests.get(url, stream=True)
@@ -183,6 +223,13 @@ class RatLauncher(QtWidgets.QWidget):
         settings["custom_res"][0] = self.ui.custom_resolution.isChecked()
         settings["custom_res"][1] = self.ui.w_res.value()
         settings["custom_res"][2] = self.ui.h_res.value()
+        settings["filters"] = [
+            self.ui.snapshot_filter.isChecked(),
+            self.ui.alpha_filter.isChecked(),
+            self.ui.beta_filter.isChecked(),
+            self.ui.old_alpha_filter.isChecked(),
+            self.ui.old_beta_filter.isChecked(),
+        ]
         self.save_settings()
 
     def change_folder(self, new_folder: str) -> None:
@@ -321,6 +368,7 @@ class RatLauncher(QtWidgets.QWidget):
                 app.setPalette(self.white_palette)
                 app.setStyleSheet("")
                 settings["theme"] = "white"
+                self.ui.update_versions_button.setIcon(QtGui.QIcon(":/icons/refresh_black.svg"))
                 self.ui.add_account.setIcon(QtGui.QIcon(":/icons/add_black.svg"))
                 self.ui.delete_account.setIcon(QtGui.QIcon(":/icons/del_black.svg"))
                 self.ui.update_versions.setIcon(QtGui.QIcon(":/icons/refresh_black.svg"))
@@ -329,6 +377,7 @@ class RatLauncher(QtWidgets.QWidget):
                 app.setPalette(self.dark_palette)
                 app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
                 settings["theme"] = "dark"
+                self.ui.update_versions_button.setIcon(QtGui.QIcon(":/icons/refresh_white.svg"))
                 self.ui.add_account.setIcon(QtGui.QIcon(":/icons/add_white.svg"))
                 self.ui.delete_account.setIcon(QtGui.QIcon(":/icons/del_white.svg"))
                 self.ui.update_versions.setIcon(QtGui.QIcon(":/icons/refresh_white.svg"))
@@ -344,7 +393,7 @@ class RatLauncher(QtWidgets.QWidget):
             self.ui.version_combo.addItems([i["id"] for i in mll.utils.get_installed_versions(self.minecraft_dir)])
 
     def install_version(self) -> None:
-        version_to_install = str(self.ui.version_lineedit.text())
+        version_to_install = self.ui.install_version_combo.currentText()
         if self.ui.vanilla_radio.isChecked():
             mll.install.install_minecraft_version(version_to_install, self.minecraft_dir, callback=self.mll_callback)
         elif self.ui.forge_radio.isChecked():

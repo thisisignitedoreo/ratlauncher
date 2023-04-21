@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'form.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.2
+## Created by: Qt User Interface Compiler version 6.5.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -27,7 +27,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(618, 437)
+        Form.resize(678, 437)
         icon = QIcon()
         icon.addFile(u":/icons/dependences/icon.ico", QSize(), QIcon.Normal, QIcon.Off)
         Form.setWindowIcon(icon)
@@ -150,10 +150,16 @@ class Ui_Form(object):
 
         self.version_install_layout = QHBoxLayout()
         self.version_install_layout.setObjectName(u"version_install_layout")
-        self.version_lineedit = QLineEdit(self.play_page)
-        self.version_lineedit.setObjectName(u"version_lineedit")
+        self.install_version_combo = QComboBox(self.play_page)
+        self.install_version_combo.setObjectName(u"install_version_combo")
 
-        self.version_install_layout.addWidget(self.version_lineedit)
+        self.version_install_layout.addWidget(self.install_version_combo)
+
+        self.update_versions_button = QToolButton(self.play_page)
+        self.update_versions_button.setObjectName(u"update_versions_button")
+        self.update_versions_button.setIcon(icon3)
+
+        self.version_install_layout.addWidget(self.update_versions_button)
 
         self.install_button = QToolButton(self.play_page)
         self.install_button.setObjectName(u"install_button")
@@ -432,7 +438,50 @@ class Ui_Form(object):
 
         self.vlayout_3.addLayout(self.hlayout_7)
 
-        self.vspacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.hlayout_2 = QHBoxLayout()
+        self.hlayout_2.setObjectName(u"hlayout_2")
+        self.filter_label = QLabel(self.settings_page)
+        self.filter_label.setObjectName(u"filter_label")
+
+        self.hlayout_2.addWidget(self.filter_label)
+
+        self.hspacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.hlayout_2.addItem(self.hspacer_2)
+
+        self.snapshot_filter = QCheckBox(self.settings_page)
+        self.snapshot_filter.setObjectName(u"snapshot_filter")
+
+        self.hlayout_2.addWidget(self.snapshot_filter)
+
+        self.beta_filter = QCheckBox(self.settings_page)
+        self.beta_filter.setObjectName(u"beta_filter")
+        self.beta_filter.setChecked(True)
+
+        self.hlayout_2.addWidget(self.beta_filter)
+
+        self.alpha_filter = QCheckBox(self.settings_page)
+        self.alpha_filter.setObjectName(u"alpha_filter")
+        self.alpha_filter.setChecked(True)
+
+        self.hlayout_2.addWidget(self.alpha_filter)
+
+        self.old_alpha_filter = QCheckBox(self.settings_page)
+        self.old_alpha_filter.setObjectName(u"old_alpha_filter")
+        self.old_alpha_filter.setChecked(True)
+
+        self.hlayout_2.addWidget(self.old_alpha_filter)
+
+        self.old_beta_filter = QCheckBox(self.settings_page)
+        self.old_beta_filter.setObjectName(u"old_beta_filter")
+        self.old_beta_filter.setChecked(True)
+
+        self.hlayout_2.addWidget(self.old_beta_filter)
+
+
+        self.vlayout_3.addLayout(self.hlayout_2)
+
+        self.vspacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
         self.vlayout_3.addItem(self.vspacer)
 
@@ -526,6 +575,7 @@ class Ui_Form(object):
         self.update_versions.setText("")
         self.play_button.setText(QCoreApplication.translate("Form", u"\u0418\u0433\u0440\u0430\u0442\u044c", None))
         self.install_label.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430", None))
+        self.update_versions_button.setText("")
         self.install_button.setText(QCoreApplication.translate("Form", u"\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c", None))
         self.vanilla_radio.setText(QCoreApplication.translate("Form", u"Vanilla", None))
         self.forge_radio.setText(QCoreApplication.translate("Form", u"Forge", None))
@@ -557,6 +607,12 @@ class Ui_Form(object):
         self.x_label.setText(QCoreApplication.translate("Form", u"x", None))
         self.folder_label.setText(QCoreApplication.translate("Form", u"\u041f\u0430\u043f\u043a\u0430 \u0441 \u0438\u0433\u0440\u043e\u0439:", None))
         self.folder_edit.setText(QCoreApplication.translate("Form", u"gamefiles", None))
+        self.filter_label.setText(QCoreApplication.translate("Form", u"\u0424\u0438\u043b\u044c\u0442\u0440 \u0432\u0435\u0440\u0441\u0438\u0439:", None))
+        self.snapshot_filter.setText(QCoreApplication.translate("Form", u"\u0421\u043d\u0430\u043f\u0448\u043e\u0442\u044b", None))
+        self.beta_filter.setText(QCoreApplication.translate("Form", u"\u0411\u0435\u0442\u044b", None))
+        self.alpha_filter.setText(QCoreApplication.translate("Form", u"\u0410\u043b\u044c\u0444\u044b", None))
+        self.old_alpha_filter.setText(QCoreApplication.translate("Form", u"\"\u0421\u0442\u0430\u0440\u044b\u0435\" \u0430\u043b\u044c\u0444\u044b", None))
+        self.old_beta_filter.setText(QCoreApplication.translate("Form", u"\"\u0421\u0442\u0430\u0440\u044b\u0435\" \u0411\u0435\u0442\u044b", None))
         self.label.setText(QCoreApplication.translate("Form", u"\u041d\u0430 \u0441\u0447\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u043f\u0438\u0448\u0438\u0442\u0435 _acid#9519_, \u0446\u0435\u043d\u0443 \u043e\u0431\u0441\u0443\u0434\u0438\u043c. \u041e\u0442\u0432\u0435\u0442\u0438\u0442\u044c \u043c\u043e\u0433\u0443 \u043d\u0435 \u0441\u0440\u0430\u0437\u0443!", None))
         self.back_button.setText(QCoreApplication.translate("Form", u"<< \u041d\u0430\u0437\u0430\u0434", None))
         self.update_button.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u0438", None))
@@ -567,7 +623,7 @@ class Ui_Form(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'MS Shell Dlg 2'; font-size:28pt;\">\u0412\u044b\u0431\u0435\u0440\u0438 \u043d\u043e\u0432\u043e\u0441\u0442\u044c \u0441\u043b\u0435\u0432\u0430!</span></p></body></html>", None))
     # retranslateUi
 

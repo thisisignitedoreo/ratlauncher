@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>618</width>
+    <width>678</width>
     <height>437</height>
    </rect>
   </property>
@@ -197,7 +197,18 @@
              <item>
               <layout class="QHBoxLayout" name="version_install_layout">
                <item>
-                <widget class="QLineEdit" name="version_lineedit"/>
+                <widget class="QComboBox" name="install_version_combo"/>
+               </item>
+               <item>
+                <widget class="QToolButton" name="update_versions_button">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="res.qrc">
+                   <normaloff>:/icons/refresh_black.svg</normaloff>:/icons/refresh_black.svg</iconset>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QToolButton" name="install_button">
@@ -636,12 +647,83 @@
           </layout>
          </item>
          <item>
+          <layout class="QHBoxLayout" name="hlayout_2">
+           <item>
+            <widget class="QLabel" name="filter_label">
+             <property name="text">
+              <string>Фильтр версий:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="hspacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="snapshot_filter">
+             <property name="text">
+              <string>Снапшоты</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="beta_filter">
+             <property name="text">
+              <string>Беты</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="alpha_filter">
+             <property name="text">
+              <string>Альфы</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="old_alpha_filter">
+             <property name="text">
+              <string>&quot;Старые&quot; альфы</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="old_beta_filter">
+             <property name="text">
+              <string>&quot;Старые&quot; Беты</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
           <spacer name="vspacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
+            <enum>QSizePolicy::Fixed</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -718,7 +800,7 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:28pt;&quot;&gt;Выбери новость слева!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
