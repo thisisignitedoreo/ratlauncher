@@ -1,7 +1,10 @@
 # Внимание
 Проект больше не поддерживается. Очень жаль, но я забил на него. Он уже даже не запускается, т.к. сайт больше не работает.
 Было круто.
+
 So long, and thanks for all the fish.
+
+---
 
 <img align=center alt="RatLauncher Icon" src="dependences/icon.ico">
 
